@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qq1833111108.biz.mapper.FirmwareVersionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.qq1833111108.biz.entity.FirmwareVersion">
+        <id column="id" property="id" />
+        <result column="type_name" property="typeName" />
+        <result column="unzip_pwd" property="unzipPwd" />
+        <result column="new_ver" property="newVer" />
+        <result column="firm_file_path" property="firmFilePath" />
+        <result column="md5" property="md5" />
+        <result column="status" property="status" />
+        <result column="create_operator" property="createOperator" />
+        <result column="create_operator_id" property="createOperatorId" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_operator" property="modifyOperator" />
+        <result column="modify_operator_id" property="modifyOperatorId" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+</mapper>

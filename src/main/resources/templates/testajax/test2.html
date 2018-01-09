@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- 测试ajax jsonp 请求 -->
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="${request.contextPath}/js/jquery.min.js?v=2.1.4"></script> 
+  <script type="text/javascript">  
+    //curl -l -H "Content-type: application/json" -X GET http://127.0.0.1/admin/user/getList?pageNumber=1&pageSize=5&callback=jQuery214008033468439434732_1513589515421
+    $(document).ready(function(){  
+		$.ajax({
+			type :"POST",
+			async : true,
+			dataType:"jsonp",
+			jsonp:"callback",
+			//jsonpCallback : "handler", //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据。如果为自定义，这里callback=handler,如果为jQuery默认，则为随机jsonp1356493334400之类的数据  
+					
+			url :"/admin/user/getList?pageNumber=1&pageSize=5",  //&callback=JQuery234234234234
+			data :"",
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+			  jAlert("warning","error!","bbbbbbbbbbbb");
+			},			
+			success : function(resultData) {
+				alert("result="+JSON.stringify(resultData));    
+				//console.log(JSON.stringify(resultData));
+			}
+		});
+    });  
+</script>
+ </head>
+ <body>
+  
+ </body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- 测试ajax json 请求 -->
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+ 	<input type="submit" value="test" onclick="javascript:test();">
+	<script type="text/javascript">  
+	  //curl -l -H "Content-type: application/json" -X POST -d '{"pageSize":100,"currentPage":1,"sex":1}' http://127.0.0.1/admin/user/getList?pageNumber=1&pageSize=5&callback=jQuery214008033468439434732_1513589515421
+	  function test(){  
+	      var data1={"pageSize":5,"pageNumber":1};      //服务端需要放在请求参数中接收，这里实际不起作用
+	      $.ajax({ 
+	          type:"POST", 
+	          url:"/admin/user/getList?pageNumber=1&pageSize=2", //&callback=JQuery234234234234
+	          dataType:"json",      
+	          contentType:"application/json",               
+	          data:JSON.stringify(data1), 
+	          success:function(resultData){ 
+	              alert("result="+JSON.stringify(resultData));     
+	          } 
+	       }); 
+	  };  
+	</script> 	
+	<script src="${request.contextPath}/js/jquery.min.js?v=2.1.4"></script> 	
+ </body>
+</html>

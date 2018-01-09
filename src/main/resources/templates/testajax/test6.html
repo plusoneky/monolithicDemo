@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- 测试 bootstrap-fileinput 上传文件 DEMO源码  表单提交方式-->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+	<!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+	<!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
+	<!-- link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- piexif.min.js is only needed for restoring exif data in resized images and when you 
+	    wish to resize images before upload. This must be loaded before fileinput.min.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/piexif.min.js" type="text/javascript"></script>
+	<!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview. 
+	    This must be loaded before fileinput.min.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/sortable.min.js" type="text/javascript"></script>
+	<!-- purify.min.js is only needed if you wish to purify HTML content in your preview for 
+	    HTML files. This must be loaded before fileinput.min.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/purify.min.js" type="text/javascript"></script>
+	<!-- popper.min.js below is needed if you use bootstrap 4.x. You can also use the bootstrap js 
+	   3.3.x versions without popper.min.js. -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<!-- bootstrap.min.js below is needed if you wish to zoom and preview file content in a detail modal
+	    dialog. bootstrap 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" type="text/javascript"></script>
+	<!-- the main fileinput plugin file -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
+	<!-- optionally if you need a theme like font awesome theme you can include it as mentioned below -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/themes/fa/theme.js"></script>
+	<!-- optionally if you need translation for your language then include  locale file as mentioned below -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/locales/zh.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/themes/explorer-fa/theme.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+
+  </head>
+  <body>
+<!-- Standard button -->
+<button type="button" class="btn btn-default">（默认样式）Default</button>
+
+<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+<button type="button" class="btn btn-primary">（首选项）Primary</button>
+
+<!-- Indicates a successful or positive action -->
+<button type="button" class="btn btn-success">（成功）Success</button>
+
+<!-- Contextual button for informational alert messages -->
+<button type="button" class="btn btn-info">（一般信息）Info</button>
+
+<!-- Indicates caution should be taken with this action -->
+<button type="button" class="btn btn-warning">（警告）Warning</button>
+
+<!-- Indicates a dangerous or potentially negative action -->
+<button type="button" class="btn btn-danger">（危险）Danger</button>
+
+<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+<button type="button" class="btn btn-link">（链接）Link</button>  
+<h1>你好，世界！</h1>
+<div class="container kv-main">
+    <form enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="file-loading">
+                <input id="file-4" type="file" class="file" name="multipartFile">
+            </div>
+        </div>
+        <hr>
+    </form>
+</div>
+
+</body>
+<script>
+$("#file-4").fileinput({
+	language : "zh",
+	enctype:'multipart/form-data',
+	uploadUrl: 'http://127.0.0.1/biz/f_ver/test_upload',
+	uploadAsync: true, //默认异步上传
+    theme: 'fa',
+    uploadExtraData: {test: '100'},
+	maxFileCount: 1,//最大上传文件数限制
+	allowedFileExtensions : ['jpg', 'png','gif','txt','zip','ico','jpeg','js','css','mp3','mp4','doc','docx','tar.gz'],//允许的文件类型
+	maxFileSize: 15,//文件的最大大小 单位是k
+	showPreview: true, //是否显示预览
+	showUpload: true,
+	layoutTemplates:{
+		actionDelete:'',
+		actionUpload:'',
+		actionZoom:'',
+	},
+	slugCallback: function(filename) {
+		return filename;
+	}
+});
+
+$("#file-4").on('fileuploaderror', function(event, data, msg) {
+	//$('.fileinput-upload').addClass("kv-hidden");
+});
+
+$("#file-4").on('click', function () {
+	//$('.fileinput-upload').removeClass("kv-hidden");
+    //$("#file-4").fileinput('refresh', {uploadClass: 'btn btn-default btn-secondary fileinput-upload fileinput-upload-button'});
+});
+
+// 浏览图片后出发
+$("#file-4").on('filebatchselected', function(event, data, msg) {
+	if(data==null || data==undefined || data==""){
+		$('.fileinput-upload').addClass("kv-hidden");
+	}else{
+		$('.fileinput-upload').removeClass("kv-hidden");
+	}
+});
+// 检验上传条件
+$('#file-4').on('filepreupload', function(event, data, previewId, index, jqXHR) {
+});
+// 处理上传成功
+$("#file-4").on("fileuploaded", function(event, data, previewId, index) {
+});
+
+
+</script>
+	
+ 
+
+  </body>
+</html>
