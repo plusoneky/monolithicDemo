@@ -94,6 +94,9 @@ public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
     	wrapper.eq("type_name", apiReqDto.getTypeName());
     	wrapper.eq("mac", apiReqDto.getMac());
     	FrimwareUpdateLog frimwareUpdateLog = frimwareUpdateLogServiceImpl.selectOne(wrapper);
+    	if(frimwareUpdateLog==null){
+    		throw new MyException(FrimwareProtocolServiceErrCode.FrimwareIsNotExist);
+    	}    	
 		return frimwareUpdateLog;
 	}
 	
