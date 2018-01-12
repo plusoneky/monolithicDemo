@@ -129,7 +129,7 @@ public class FrimwareUpdateLogController extends BaseController {
 				oneFrimwareUpdateLog.setImportTime(new Date());
 				oneFrimwareUpdateLog.setFlag("yes".equalsIgnoreCase(excelTerminalVO.getFlag()) ? "yes" : "no");
 
-				oneFrimwareUpdateLog.setStatus("offline");
+				oneFrimwareUpdateLog.setStatus("Offline");
 				oneFrimwareUpdateLog.setUpdateResultReport("initial");
 				insertLogList.add(oneFrimwareUpdateLog);
 
@@ -240,7 +240,7 @@ public class FrimwareUpdateLogController extends BaseController {
 		frimwareUpdateLog.setImportOperator(getCurrentLoginUsername());
 		frimwareUpdateLog.setImportTime(new Date());
 
-		frimwareUpdateLog.setStatus("offline");
+		frimwareUpdateLog.setStatus("Offline");
 		frimwareUpdateLog.setUpdateResultReport("initial");
 		return this.frimwareUpdateLogImpl.insert(frimwareUpdateLog) ? renderSuccess("添加成功") : renderError("添加失败");
 	}
