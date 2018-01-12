@@ -50,8 +50,8 @@ public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
 			throw new MyException(FrimwareProtocolServiceErrCode.FrimwareIsNotEnableUpdate);
 		}
 		// 验证固件新版本是否存在
-		FirmwareVersion FirmwareVersion = getFirmwareVersion(frimwareUpdateLog.getTypeName());
-		if(getNewVerDto.getCurrVer().equals(FirmwareVersion.getNewVer())){
+		FirmwareVersion firmwareVersion = getFirmwareVersion(frimwareUpdateLog.getTypeName());
+		if(getNewVerDto.getCurrVer().equals(firmwareVersion.getNewVer())){
 			throw new MyException(FrimwareProtocolServiceErrCode.FrimwareNewVersionIsNotExist);
 		}
 		// 记录固件更新日志
@@ -62,7 +62,7 @@ public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
     	log.setGetNewVerTime(new Date());
 		frimwareUpdateLogServiceImpl.updateById(log);
 		
-		return FirmwareVersion;
+		return firmwareVersion;
 	}
 
 	@Override
