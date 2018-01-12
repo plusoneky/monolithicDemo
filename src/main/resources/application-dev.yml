@@ -36,7 +36,7 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:/mapper/*/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.qq1833111108.sys.entity, com.qq1833111108.biz.entity
+  typeAliasesPackage: com.qq1833111108.*.entity
   #typeEnumsPackage: com.qq1833111108.biz.entity.enums
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
