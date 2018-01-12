@@ -130,7 +130,7 @@ public class FrimwareUpdateLogController extends BaseController {
 				oneFrimwareUpdateLog.setFlag("yes".equalsIgnoreCase(excelTerminalVO.getFlag()) ? "yes" : "no");
 
 				oneFrimwareUpdateLog.setStatus("Offline");
-				oneFrimwareUpdateLog.setUpdateResultReport("initial");
+				oneFrimwareUpdateLog.setUpdateResultReport("Initial");
 				insertLogList.add(oneFrimwareUpdateLog);
 
 				boolean snExistInExcel = snSet.add(oneFrimwareUpdateLog.getSn());
@@ -241,7 +241,7 @@ public class FrimwareUpdateLogController extends BaseController {
 		frimwareUpdateLog.setImportTime(new Date());
 
 		frimwareUpdateLog.setStatus("Offline");
-		frimwareUpdateLog.setUpdateResultReport("initial");
+		frimwareUpdateLog.setUpdateResultReport("Initial");
 		return this.frimwareUpdateLogImpl.insert(frimwareUpdateLog) ? renderSuccess("添加成功") : renderError("添加失败");
 	}
 
