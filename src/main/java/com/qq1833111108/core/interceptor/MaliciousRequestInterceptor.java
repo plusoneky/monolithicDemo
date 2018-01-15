@@ -4,10 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.qq1833111108.common.exception.HttpCode;
+import com.qq1833111108.config.properties.SysProperties;
 import com.qq1833111108.core.Constants;
 
 /**
@@ -18,11 +20,17 @@ import com.qq1833111108.core.Constants;
 public class MaliciousRequestInterceptor extends BaseInterceptor {
 	private boolean allRequest = false;
 	
-	@Value("${sysProperties.minRequestIntervalTime}")
+	//@Value("${sysProperties.minRequestIntervalTime}")
 	private long minRequestIntervalTime;
 	
-	@Value("${sysProperties.maxMaliciousTimes}")
+	//@Value("${sysProperties.maxMaliciousTimes}")
 	private long maxMaliciousTimes;
+	
+	@Autowired
+	MaliciousRequestInterceptor(SysProperties sysProperties){
+		this.minRequestIntervalTime = sysProperties.getMinRequestIntervalTime();
+		this.maxMaliciousTimes = sysProperties.getMaxMaliciousTimes();
+	}
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
