@@ -25,12 +25,16 @@ import com.qq1833111108.frimware.service.IFrimwareProtocolService;
 public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
 
 	private static final Logger logger = LoggerFactory.getLogger(FrimwareProtocolServiceImpl.class);
-	
-    @Autowired
+    
     private IFirmwareVersionService firmwareVersionServiceImpl;
     
-    @Autowired
     private IFrimwareUpdateLogService frimwareUpdateLogServiceImpl;
+    
+    @Autowired
+    FrimwareProtocolServiceImpl(IFirmwareVersionService firmwareVersionServiceImpl,IFrimwareUpdateLogService frimwareUpdateLogServiceImpl){
+    	this.firmwareVersionServiceImpl = firmwareVersionServiceImpl;
+    	this.frimwareUpdateLogServiceImpl = frimwareUpdateLogServiceImpl;
+    }
     
 	@Override
 	public FirmwareVersion getFirmwareNewVersion(GetNewVerDto getNewVerDto) {
@@ -82,7 +86,6 @@ public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
     	log.setUpdateLog("lastVer="+frimwareUpdateLog.getVer());
 		frimwareUpdateLogServiceImpl.updateById(log);
 	}
-
 	
 	private FrimwareUpdateLog getFirmwareUpdateLog(BaseApiReqDto apiReqDto) {
 		if(StringUtils.isBlank(apiReqDto.getMac()) || StringUtils.isBlank(apiReqDto.getSn()) || StringUtils.isBlank(apiReqDto.getTypeName())){

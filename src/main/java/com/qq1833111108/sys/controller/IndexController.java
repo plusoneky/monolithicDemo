@@ -41,12 +41,18 @@ import static java.awt.SystemColor.menu;
 @RequestMapping(value = "/admin")
 public class IndexController extends BaseController {
 
-    @Autowired
     private IPermissionService iPermissionService;
-    @Autowired
+
     private IUserService iUserService;
-    @Autowired
+    
     private JavaMailSender mailSender;
+    
+    @Autowired
+    IndexController(IPermissionService iPermissionService,IUserService iUserService,JavaMailSender mailSender){
+    	this.iPermissionService = iPermissionService;
+    	this.iUserService = iUserService;
+    	this.mailSender = mailSender;
+    }
 
     // 主页
     @RequestMapping(value = "/index")

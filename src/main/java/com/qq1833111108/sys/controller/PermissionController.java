@@ -26,9 +26,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/permission")
 public class PermissionController extends BaseController {
-
-    @Autowired
+    
     private IPermissionService iPermissionService;
+    
+    @Autowired
+    PermissionController(IPermissionService iPermissionService){
+    	this.iPermissionService = iPermissionService;
+    }
 
     /**
      * 权限列表页面

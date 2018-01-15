@@ -33,11 +33,16 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/role")
 public class RoleController extends BaseController {
-
-    @Autowired
+    
     private IRoleService iRoleService;
-    @Autowired
+    
     private IUserRoleService iUserRoleService;
+    
+    @Autowired
+    RoleController(IRoleService iRoleService, IUserRoleService iUserRoleService){
+    	this.iRoleService = iRoleService;
+    	this.iUserRoleService = iUserRoleService;
+    }
 
     /**
      * 角色列表页面

@@ -45,24 +45,32 @@ import io.swagger.annotations.ApiParam;
 
 /**
  * <p>
- * 固件信息导入
+ * 终端信息导入
  * </p>
  *
  * @author qq183311108
  * @since 2017-12-07
  */
-@Api(value = "固件信息导入（后台接口）")
+@Api(value = "终端信息导入（后台接口）")
 @Controller
 @RequestMapping({ "/biz/f_log" })
 public class FrimwareUpdateLogController extends BaseController {
-	@Autowired
+	
+	private static final Logger logger = LoggerFactory.getLogger(FrimwareUpdateLogController.class);
+	
 	private IFrimwareUpdateLogService frimwareUpdateLogImpl;
-	@Autowired
-	private IFirmwareVersionService firmwareVersionServiceImpl;
-	@Autowired
-	private IUploadFileService uploadFileServiceImpl;
-	private static final Logger logger = LoggerFactory.getLogger(FirmwareVersionController.class);
 
+	private IFirmwareVersionService firmwareVersionServiceImpl;
+
+	private IUploadFileService uploadFileServiceImpl;
+
+	@Autowired
+	FrimwareUpdateLogController(IFrimwareUpdateLogService frimwareUpdateLogImpl,IFirmwareVersionService firmwareVersionServiceImpl,IUploadFileService uploadFileServiceImpl){
+		this.firmwareVersionServiceImpl = firmwareVersionServiceImpl;
+		this.frimwareUpdateLogImpl = frimwareUpdateLogImpl;
+		this.uploadFileServiceImpl = uploadFileServiceImpl;
+	}
+	
 	@RequiresPermissions({ "biz.log:list" })
 	@GetMapping({ "/loglist" })
 	public String list() {

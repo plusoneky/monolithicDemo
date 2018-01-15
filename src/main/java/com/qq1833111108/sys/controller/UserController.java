@@ -1,20 +1,9 @@
 package com.qq1833111108.sys.controller;
 
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.qq1833111108.common.controller.BaseController;
-import com.qq1833111108.common.result.JsonResult;
-import com.qq1833111108.common.utils.StringUtil;
-import com.qq1833111108.config.shiro.MyShiroRealm;
-import com.qq1833111108.sys.entity.Role;
-import com.qq1833111108.sys.entity.User;
-import com.qq1833111108.sys.service.IRoleService;
-import com.qq1833111108.sys.service.IUserService;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -23,14 +12,28 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.qq1833111108.common.controller.BaseController;
+import com.qq1833111108.common.result.JsonResult;
+import com.qq1833111108.common.utils.StringUtil;
+import com.qq1833111108.sys.entity.Role;
+import com.qq1833111108.sys.entity.User;
+import com.qq1833111108.sys.service.IRoleService;
+import com.qq1833111108.sys.service.IUserService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /**
  * <p>
@@ -45,10 +48,15 @@ import java.util.Map;
 @RequestMapping("/admin/user")
 public class UserController extends BaseController {
 
-    @Autowired
     private IUserService iUserService;
-    @Autowired
+    
     private IRoleService iRoleService;
+    
+    @Autowired
+    UserController(IUserService iUserService, IRoleService iRoleService){
+    	this.iUserService = iUserService;
+    	this.iRoleService = iRoleService;
+    }
 
     /**
      * 用户列表页面
