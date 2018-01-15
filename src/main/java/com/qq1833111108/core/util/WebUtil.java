@@ -231,7 +231,9 @@ public final class WebUtil {
 			} catch (UnknownHostException e) {
 				logger.error(Constants.Exception_Head, e);
 			}
-			ip = inet.getHostAddress();
+			if(inet!=null){
+				ip = inet.getHostAddress();
+			}
 		}
 		logger.debug("getRemoteAddr ip: " + ip);
 		return ip;
