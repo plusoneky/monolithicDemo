@@ -33,9 +33,13 @@ import java.nio.MappedByteBuffer;
  */
 @Service
 public class UploadFileServiceImpl implements IUploadFileService {
-	
-    @Autowired
+    
     private BizProperties bizProperties;
+    
+    @Autowired
+    UploadFileServiceImpl(BizProperties bizProperties){
+    	this.bizProperties = bizProperties;
+    }
 	
 	public enum UploadFileType {
 		IMG("img","下载图片",true),

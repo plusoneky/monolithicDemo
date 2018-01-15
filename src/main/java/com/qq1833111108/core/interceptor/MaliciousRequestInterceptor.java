@@ -16,9 +16,11 @@ import com.qq1833111108.core.Constants;
  */
 @Component
 public class MaliciousRequestInterceptor extends BaseInterceptor {
-	private Boolean allRequest = Boolean.valueOf(false);
+	private boolean allRequest = false;
+	
 	@Value("${sysProperties.minRequestIntervalTime}")
 	private long minRequestIntervalTime;
+	
 	@Value("${sysProperties.maxMaliciousTimes}")
 	private long maxMaliciousTimes;
 
