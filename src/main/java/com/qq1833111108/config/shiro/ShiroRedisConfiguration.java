@@ -1,5 +1,6 @@
 package com.qq1833111108.config.shiro;
 
+import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -7,36 +8,39 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+
+import javax.servlet.Filter;
+
 /**
  * Author: qq183311108
  * Email: 183311108@qq.com
- * Date: 2017/9/1
+ * Date: 2018/1/15
  * Time: 00:00
- * Describe: Shiro 单机配置，生产环境如果没有集成redis，可以使用本配置，实现单机会话管理，使用的是ehCache缓存
+ * Describe: Shiro集群配置，集成了Redis，支持分布式session共享，默认使用本配置
  */
-//@Configuration
-//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400*30) //配合spring-session-data-redis，默认不使用。
-public class ShiroConfiguration {
+@Configuration
+public class ShiroRedisConfiguration {
 
-    private static final transient Logger log = LoggerFactory.getLogger(ShiroConfiguration.class);
+    private static final transient Logger log = LoggerFactory.getLogger(ShiroRedisConfiguration.class);
 
     /**
-     *  Shiro 过滤器
+     * Shiro 过滤器
      * @param securityManager
      * @return
      */
-    @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    @Bean(name="shiroFilter")
+    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager) {
         log.info("ShiroConfiguration.shirFilter()");
         ShiroFilterFactoryBean shiroFilterFactoryBean  = new ShiroFilterFactoryBean();
 
@@ -50,6 +54,11 @@ public class ShiroConfiguration {
         // 未授权界面
         shiroFilterFactoryBean.setUnauthorizedUrl("/500.html");
 
+        Map<String, Filter> filters = new LinkedHashMap<String,Filter>();
+        filters.put("authc", new MyAuthenticationFilter());
+        filters.put("kickout", new MyKickoutSessionControlFilter());
+        shiroFilterFactoryBean.setFilters(filters);        
+        
         // 拦截器.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 
@@ -70,7 +79,10 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/admin/sencCode", "anon"); // 发送邮箱验证码
         filterChainDefinitionMap.put("/admin/isUsername/**", "anon"); // 判断用户名是否存在
         filterChainDefinitionMap.put("/admin/isEmail/**", "anon"); // 判断邮箱是否存在
-
+        
+        filterChainDefinitionMap.put("/test*", "anon"); // 测试
+        //filterChainDefinitionMap.put("/admin/user/getList*", "anon"); // 测试
+        
         //swagger
 		filterChainDefinitionMap.put("/*/api-docs", "anon");
 		filterChainDefinitionMap.put("/swagger*", "anon");
@@ -90,19 +102,21 @@ public class ShiroConfiguration {
          */
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        
         return shiroFilterFactoryBean;
     }
+        
 
     /**
-     *  Shiro 安全管理器
+     * Shiro 安全管理器 
      * @return
      */
-    @Bean
-    public SecurityManager securityManager(){
-        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
-
+    @Bean(name="securityManager")
+    public SecurityManager securityManager(@Qualifier("authRealm") AuthorizingRealm authRealm){
+    	System.err.println("--------------支持分布式session共享shiro已经加载----------------");
+    	DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         //设置realm
-        securityManager.setRealm(myShiroRealm());
+        securityManager.setRealm(authRealm);
         securityManager.setCacheManager(ehCacheManager());
         return securityManager;
     }
@@ -111,8 +125,8 @@ public class ShiroConfiguration {
      * 身份认证realm
      * @return
      */
-    @Bean
-    public MyShiroRealm myShiroRealm() {
+    @Bean(name="authRealm")
+    public AuthorizingRealm authRealm() {
         MyShiroRealm myShiroRealm = new MyShiroRealm();
         myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return myShiroRealm;

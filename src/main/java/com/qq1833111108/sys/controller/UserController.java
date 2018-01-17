@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,6 +16,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -79,11 +82,17 @@ public class UserController extends BaseController {
      * @param searchText 搜索名称
      * @return
      */
-    @RequiresPermissions("sys.user:list")
+    //@CrossOrigin(origins = "*", maxAge = 3600)
+    //@RequiresPermissions("sys.user:list")
     @ResponseBody
-    @PostMapping("/getList")
-    public Map<String, Object> getUserList(int pageNumber, int pageSize, String searchText) {
-        Map<String,Object> result = new HashMap<String,Object>();
+    @RequestMapping("/getList")
+    public Map<String, Object> getUserList(int pageNumber, int pageSize, String searchText, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+		response.setHeader("Access-Control-Allow-Headers","origin,x-requested-with,content-type,Accept,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID,Authorization"); //, x-requested-with,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID
+		response.setHeader("Access-Control-Max-Age", "3628800");
+        response.setHeader("Access-Control-Allow-Credentials","true");	
+		Map<String,Object> result = new HashMap<String,Object>();
         Page<User> page = new Page<>(pageNumber, pageSize);
         EntityWrapper<User> wrapper = new EntityWrapper<>();
         if (StringUtil.isNotEmpty(searchText)) {

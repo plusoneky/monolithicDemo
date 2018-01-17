@@ -35,8 +35,7 @@ import java.util.List;
  */
 public class MyShiroRealm extends AuthorizingRealm {
 
-    private static final transient Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class);
-    
+    private static final transient Logger logger = LoggerFactory.getLogger(ShiroRedisConfiguration.class);
 
     @Autowired
     private IUserService iUserService;
