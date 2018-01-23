@@ -84,8 +84,7 @@ public class UserController extends BaseController {
      * @param searchText 搜索名称
      * @return
      */
-    //@CrossOrigin(origins = "*", maxAge = 3600)
-    //@RequiresPermissions("sys.user:list")
+    @RequiresPermissions("sys.user:list")
     @ResponseBody
     @RequestMapping("/getList")
     public Map<String, Object> getUserList(int pageNumber, int pageSize, String searchText, HttpServletRequest request, HttpServletResponse response) {	
