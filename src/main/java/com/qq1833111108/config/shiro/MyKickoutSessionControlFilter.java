@@ -158,12 +158,13 @@ public class MyKickoutSessionControlFilter extends AccessControlFilter {
 		}
 	}
 
+	/* 
+	 * 为了支持CORS跨域
+	 */
 	@Override
 	protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		System.out.println("-----------------Origin-------------------------" + request.getHeader("Origin"));
-
 		if (request.getMethod().equals(RequestMethod.OPTIONS.name())) {
 			response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 			response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
@@ -171,9 +172,6 @@ public class MyKickoutSessionControlFilter extends AccessControlFilter {
 					"origin,x-requested-with,content-type,Accept,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID,Authorization");
 			response.setHeader("Access-Control-Max-Age", "3628800");
 			response.setHeader("Access-Control-Allow-Credentials", "true");
-
-			System.out.println("request.getRequestURI()=" + request.getRequestURI());
-			System.out.println("request.getMethod()=" + request.getMethod());
 
 			response.setStatus(HttpStatus.OK.value());
 			return false;
