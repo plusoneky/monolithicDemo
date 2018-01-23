@@ -23,9 +23,13 @@ import org.crazycake.shiro.RedisSessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+
+import com.qq1833111108.config.properties.BizProperties;
+import com.qq1833111108.config.redis.RedisConfig;
 /**
  * Author: qq183311108
  * Email: 183311108@qq.com
@@ -37,6 +41,12 @@ import org.springframework.context.annotation.DependsOn;
 public class ShiroRedisCacheConfiguration {
 
 	private static final Logger logger = LoggerFactory.getLogger(ShiroRedisCacheConfiguration.class);
+	
+	@Autowired
+	private RedisConfig redisConfig;
+	
+	@Autowired
+	private BizProperties bizProperties;
 
     /**
      *  Shiro 过滤器
@@ -122,11 +132,11 @@ public class ShiroRedisCacheConfiguration {
     }      
        
     @Bean
-    public RedisManager redisManager(){
+    public RedisManager redisManager(){   
     	RedisManager redisManager = new RedisManager();
-    	redisManager.setHost("192.168.1.200");
-    	redisManager.setPort(6379);
-    	redisManager.setPassword("123456");
+    	redisManager.setHost(redisConfig.getHost());
+    	redisManager.setPort(redisConfig.getPort());
+    	redisManager.setPassword(redisConfig.getPassword());
     	redisManager.setExpire(604800000);
     	return redisManager;   	
     }
@@ -159,7 +169,7 @@ public class ShiroRedisCacheConfiguration {
     @Bean
     public Cookie sessionIdCookie(){
     	SimpleCookie sessionIdCookie = new SimpleCookie();
-    	sessionIdCookie.setDomain(".testcors.com");
+    	sessionIdCookie.setDomain(bizProperties.getFirstClassDomainName());
     	sessionIdCookie.setName("accessFirmToken");
 		return sessionIdCookie;
     }    
@@ -196,12 +206,13 @@ public class ShiroRedisCacheConfiguration {
     }
 
     /**
-     * Shiro生命周期处理器 * @return
+     * Shiro生命周期处理器  会导致本类无法注入
+     * @return 
      */
-    @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
-    }
+//    @Bean
+//    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+//        return new LifecycleBeanPostProcessor();
+//    }
 
     /**
      *  开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全
@@ -209,7 +220,6 @@ public class ShiroRedisCacheConfiguration {
      * @return
      */
     @Bean
-    @DependsOn({"lifecycleBeanPostProcessor"})
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         advisorAutoProxyCreator.setProxyTargetClass(true);
