@@ -96,7 +96,7 @@ public class ShiroRedisCacheConfiguration {
 		//终端业务
 		filterChainDefinitionMap.put("/tp/**", "anon");
 
-        filterChainDefinitionMap.put("/**", "kickout,authc");    //注意，这里要加上kickout
+        filterChainDefinitionMap.put("/**", "kickout,authc");    //注意，这里要加上kickout,要放前面，因为cors跨域
         /**
          * anon:所有url都都可以匿名访问;
          * authc: 需要认证才能进行访问;
