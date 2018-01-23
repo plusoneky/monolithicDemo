@@ -88,12 +88,7 @@ public class UserController extends BaseController {
     //@RequiresPermissions("sys.user:list")
     @ResponseBody
     @RequestMapping("/getList")
-    public Map<String, Object> getUserList(int pageNumber, int pageSize, String searchText, HttpServletRequest request, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-		response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
-		response.setHeader("Access-Control-Allow-Headers","origin,x-requested-with,content-type,Accept,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID,Authorization"); //, x-requested-with,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID
-		response.setHeader("Access-Control-Max-Age", "3628800");
-        response.setHeader("Access-Control-Allow-Credentials","true");	
+    public Map<String, Object> getUserList(int pageNumber, int pageSize, String searchText, HttpServletRequest request, HttpServletResponse response) {	
 		Map<String,Object> result = new HashMap<String,Object>();
         Page<User> page = new Page<>(pageNumber, pageSize);
         EntityWrapper<User> wrapper = new EntityWrapper<>();

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import com.qq1833111108.core.interceptor.LocaleInterceptor;
 import com.qq1833111108.core.interceptor.MaliciousRequestInterceptor;
 
-//@Configuration
+@Configuration
 public class AddInterceptor extends WebMvcConfigurerAdapter {
 	@Autowired
 	MaliciousRequestInterceptor maliciousRequestInterceptor;
