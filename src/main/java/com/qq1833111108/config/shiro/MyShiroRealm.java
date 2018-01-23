@@ -48,8 +48,6 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        logger.info("MyShiroRealm.doGetAuthenticationInfo()");
-
         // 获取用户的输入的账号.
         String username = (String)token.getPrincipal();
 
@@ -74,10 +72,9 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        logger.info("MyShiroRealm.doGetAuthorizationInfo()");
-
         // 获取用户信息 
-        User user = (User) principals.getPrimaryPrincipal();
+    	//这里转换类型如果有错，请去掉maven中依赖的spring-boot-devtools进行尝试，或者配置spring-devtools.properties文件中restart.include.shiro
+        User user = (User) principals.getPrimaryPrincipal();   
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 
