@@ -53,7 +53,6 @@ spring:
       #连接超时时间（毫秒）
       timeout: 0
       #分布式session共享并支持跨域
-    cookieDomain: testcors.com
 
 #MyBatis
 mybatis-plus:
@@ -87,7 +86,6 @@ mybatis-plus:
 #logging
 logging:
   level: debug
-  
 
 bizProperties:  
   uploadFileAbsDir: /var/uploaddir

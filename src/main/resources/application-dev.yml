@@ -53,7 +53,6 @@ spring:
       #连接超时时间（毫秒）
       timeout: 0
       #分布式session共享并支持跨域
-    cookieDomain: testcors.com
   data: 
     mongodb: 
       uri: mongodb://root:123456@192.168.1.201:27017/thqzlog
@@ -96,6 +95,7 @@ bizProperties:
   uploadFileAbsDir: E:/uploaddir
   updownFileAbsDir: E:/uploaddownloaddir/updown/
   updownPrefixURL: https://127.0.0.1/updown
+  firstClassDomainName: testcors.com
   
 sysProperties:  
   minRequestIntervalTime: 1000

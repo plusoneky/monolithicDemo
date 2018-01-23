@@ -1,6 +1,7 @@
 package com.qq1833111108.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component  
@@ -21,6 +22,12 @@ public class BizProperties {
 	 * 下载地址域名前缀部分
 	 */
 	private String updownPrefixURL;
+	
+	/**
+	 * 服务器一级域名
+	 */	
+	private String firstClassDomainName;
+	
 
 	public String getUploadFileAbsDir() {
 		return uploadFileAbsDir;
@@ -45,4 +52,13 @@ public class BizProperties {
 	public void setUpdownPrefixURL(String updownPrefixURL) {
 		this.updownPrefixURL = updownPrefixURL;
 	}
+
+	public String getFirstClassDomainName() {
+		return firstClassDomainName;
+	}
+
+	public void setFirstClassDomainName(String firstClassDomainName) {
+		this.firstClassDomainName = firstClassDomainName;
+	}
+	
 }

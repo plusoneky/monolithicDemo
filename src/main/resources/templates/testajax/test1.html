@@ -29,7 +29,9 @@ http://static.testcors.com:8080/test1
 	          type:"POST", 
 	          //url:"/admin/user/getList?pageNumber=1&pageSize=2", //&callback=JQuery234234234234
 	          url:"http://us.testcors.com:8080/admin/user/getList?pageNumber=1&pageSize=2", //测试跨域
-	          dataType:"json",      
+	          dataType:"json",
+	          crossDomain: true, //发送Ajax时，Request header 中会包含跨域的额外信息，但不会含cookie
+	          xhrFields: {withCredentials: true}, //发送Ajax时，Request header中便会带上 Cookie 信息
 	          contentType:"application/json",               
 	          data:JSON.stringify(data1), 
 	          success:function(resultData){ 

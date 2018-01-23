@@ -1,14 +1,8 @@
 package com.qq1833111108.config.shiro;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.qq1833111108.common.utils.StringUtil;
-import com.qq1833111108.sys.entity.Permission;
-import com.qq1833111108.sys.entity.User;
-import com.qq1833111108.sys.mapper.PermissionMapper;
-import com.qq1833111108.sys.service.IPermissionService;
-import com.qq1833111108.sys.service.IUserService;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,14 +11,17 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.qq1833111108.common.utils.StringUtil;
+import com.qq1833111108.sys.entity.Permission;
+import com.qq1833111108.sys.entity.User;
+import com.qq1833111108.sys.mapper.PermissionMapper;
+import com.qq1833111108.sys.service.IUserService;
 
 /**
  * Author: qq183311108
@@ -35,7 +32,7 @@ import java.util.List;
  */
 public class MyShiroRealm extends AuthorizingRealm {
 
-    private static final transient Logger logger = LoggerFactory.getLogger(ShiroRedisConfiguration.class);
+    private static final transient Logger logger = LoggerFactory.getLogger(MyShiroRealm.class);
 
     @Autowired
     private IUserService iUserService;
@@ -79,7 +76,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         logger.info("MyShiroRealm.doGetAuthorizationInfo()");
 
-        // 获取用户信息
+        // 获取用户信息 
         User user = (User) principals.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();

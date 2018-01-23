@@ -1,6 +1,7 @@
 package com.qq1833111108.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component  

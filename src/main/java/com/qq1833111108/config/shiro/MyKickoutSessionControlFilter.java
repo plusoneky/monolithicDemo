@@ -8,14 +8,34 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.alibaba.fastjson.JSON;
+import com.qq1833111108.common.dto.ApiResDto;
+import com.qq1833111108.common.exception.MyException;
+import com.qq1833111108.common.exception.MyException.CommErrCode;
+import com.qq1833111108.frimware.controller.FrimwareProtocolController;
+import com.qq1833111108.sys.entity.User;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class MyKickoutSessionControlFilter extends AccessControlFilter {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MyKickoutSessionControlFilter.class);
 
     private String kickoutUrl; //踢出后到的地址
     private boolean kickoutAfter = false; //踢出之前登录的/之后登录的用户 默认踢出之前登录的用户
@@ -42,6 +62,7 @@ public class MyKickoutSessionControlFilter extends AccessControlFilter {
         this.sessionManager = sessionManager;
     }
 
+    //设置Cache的key的前缀
     public void setCacheManager(CacheManager cacheManager) {
         this.cache = cacheManager.getCache(SHIRO_KICKOUT_SESSION_KEY_NAME);
     }
@@ -60,13 +81,17 @@ public class MyKickoutSessionControlFilter extends AccessControlFilter {
         }
 
         Session session = subject.getSession();
-        String username = (String) subject.getPrincipal();
+        User user = (User) subject.getPrincipal();
+        String username = user.getUsername();
+        
         Serializable sessionId = session.getId();
 
-        //TODO 同步控制
+        //TODO 同步控制，读取缓存   没有就存入
         Deque<Serializable> deque = cache.get(username);
         if(deque == null) {
+        	//将sessionId存入队列
             deque = new LinkedList<Serializable>();
+            //将用户的sessionId队列缓存
             cache.put(username, deque);
         }
 
@@ -91,21 +116,69 @@ public class MyKickoutSessionControlFilter extends AccessControlFilter {
                     kickoutSession.setAttribute("kickout", true);
                 }
             } catch (Exception e) {//ignore exception
+            	//logger.error("",e);
             }
         }
 
         //如果被踢出了，直接退出，重定向到踢出后的地址
-        if (session.getAttribute("kickout") != null) {
+        if ((Boolean)session.getAttribute("kickout")!=null&&(Boolean)session.getAttribute("kickout") == true) {
             //会话被踢出了
             try {
                 subject.logout();
             } catch (Exception e) { //ignore
+            	logger.error("",e);
             }
             saveRequest(request);
-            WebUtils.issueRedirect(request, response, kickoutUrl);
+            
+            
+			//判断是不是Ajax请求
+			if ("XMLHttpRequest".equalsIgnoreCase(((HttpServletRequest) request).getHeader("X-Requested-With"))) {
+				
+				ApiResDto resDto = new ApiResDto(new MyException(CommErrCode.KickOutByAnotherLogin));
+				//输出json串
+				ajaxOut(response, resDto);
+			}else{
+				//重定向
+				WebUtils.issueRedirect(request, response, kickoutUrl);
+			}            
             return false;
         }
-
         return true;
     }
+    
+    private void ajaxOut(ServletResponse hresponse, ApiResDto resDto)
+			throws IOException {
+		try {
+			hresponse.setCharacterEncoding("UTF-8");
+			PrintWriter out = hresponse.getWriter();
+			out.println(JSON.toJSONString(resDto));
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			logger.error("KickoutSessionFilter.class 输出JSON异常，可以忽略。",e);
+		}
+	}    
+    
+	@Override
+	protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		System.out.println("-----------------Origin-------------------------"+request.getHeader("Origin"));
+		
+		if (request.getMethod().equals(RequestMethod.OPTIONS.name())) {
+	        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+	        response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+	        response.setHeader("Access-Control-Allow-Headers", "origin,x-requested-with,content-type,Accept,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID,Authorization");
+	        response.setHeader("Access-Control-Max-Age", "3628800");
+	        response.setHeader("Access-Control-Allow-Credentials","true");		
+	        
+			System.out.println("request.getRequestURI()="+request.getRequestURI());
+			System.out.println("request.getMethod()="+request.getMethod());			
+			
+			response.setStatus(HttpStatus.OK.value());
+			return false;
+		}
+
+		return super.preHandle(request, response);
+	}    
 }

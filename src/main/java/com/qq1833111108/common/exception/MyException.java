@@ -66,7 +66,8 @@ public class MyException extends RuntimeException{
 	    UnknownDataSource("UnknownRRenPHDataSource","后台系统异常"),
 	    SysIoErr("SysIoErr","系统网络异常"),
 	    SysErr("SysErr","后台系统异常"),
-	    NotSurportedAppVersion("NotSurportedAppVersion","该版本暂不支持此功能操作，请关注新版本更新！")
+	    NotSurportedAppVersion("NotSurportedAppVersion","该版本暂不支持此功能操作，请关注新版本更新！"),
+	    KickOutByAnotherLogin("KickOutByAnotherLogin","您已经在其他地方登录，请重新登录！"),
 	    ;
 		
 		private String errCode;

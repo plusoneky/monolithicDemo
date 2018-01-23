@@ -1,31 +1,32 @@
 package com.qq1833111108.config.shiro;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;  //需要maven加依赖包 spring-session-data-redis
+
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.mgt.SecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 /**
  * Author: qq183311108
  * Email: 183311108@qq.com
  * Date: 2017/9/1
  * Time: 00:00
- * Describe: Shiro 单机配置，生产环境如果没有集成redis，可以使用本配置，实现单机会话管理，使用的是ehCache缓存
+ * Describe: Shiro 配置
  */
 //@Configuration
-//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400*30) //配合spring-session-data-redis，默认不使用。
+//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400*30) //需要maven加依赖包 spring-session-data-redis，默认不使用。
+@Deprecated
 public class ShiroConfiguration {
 
     private static final transient Logger log = LoggerFactory.getLogger(ShiroConfiguration.class);

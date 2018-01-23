@@ -2,17 +2,21 @@ package com.qq1833111108.config.redis;
 
 import java.lang.reflect.Method;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -29,6 +33,42 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport{
     
+    @Value("${spring.redis.host}")
+    private String host;
+	
+    @Value("${spring.redis.port}")
+    private int port;
+    
+    @Value("${spring.redis.password}")
+    private String password;
+    
+    private int expire=604800000;    
+
+    public String getHost() {
+		return host;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public int getExpire() {
+		return expire;
+	}
+    
+//	@Bean
+//	public RedisTemplate<String, Object> getRedisTemplate(RedisConnectionFactory factory) {
+//		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+//		redisTemplate.setConnectionFactory(factory);
+//		redisTemplate.setKeySerializer(new StringRedisSerializer()); // key的序列化类型
+//		redisTemplate.setValueSerializer(new RedisObjectSerializer()); // value的序列化类型
+//		return redisTemplate;
+//	}   
+
     @Bean
     public KeyGenerator keyGenerator() {
         return new KeyGenerator() {
@@ -66,5 +106,4 @@ public class RedisConfig extends CachingConfigurerSupport{
         template.afterPropertiesSet();
         return template;
     }
-
 }

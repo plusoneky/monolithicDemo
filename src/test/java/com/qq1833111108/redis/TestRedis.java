@@ -42,7 +42,7 @@ public class TestRedis {
         user.setEmail("testdev@163.com");
         user.setNickname("wangwu");
         
-        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+        ValueOperations operations = redisTemplate.opsForValue();
         operations.set("com.qq183311108", user);
         operations.set("com.qq183311108.f", user,1,TimeUnit.SECONDS);
         Thread.sleep(2000);
