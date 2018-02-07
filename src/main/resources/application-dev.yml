@@ -95,7 +95,7 @@ bizProperties:
   uploadFileAbsDir: E:/uploaddir
   updownFileAbsDir: E:/uploaddownloaddir/updown/
   updownPrefixURL: https://127.0.0.1/updown
-  firstClassDomainName: testcors.com
+  firstClassDomainName: 127.0.0.1
   
 sysProperties:  
   minRequestIntervalTime: 1000

@@ -91,7 +91,7 @@ bizProperties:
   uploadFileAbsDir: /var/uploaddir
   updownFileAbsDir: /var/uploaddownloaddir/updown/
   updownPrefixURL: https://39.108.61.183/updown
-  firstClassDomainName: testcors.com
+  firstClassDomainName: uf.tzzhcom.com
     
 sysProperties:  
   minRequestIntervalTime: 100000
