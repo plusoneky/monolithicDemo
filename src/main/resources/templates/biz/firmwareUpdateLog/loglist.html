@@ -281,17 +281,38 @@
                     {
                         field: 'flag',
                         title: '允许更新',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function(value,row,index){
+                            if (value == "no") {
+                                return '<span class="label label-danger">no</span>';
+                            }else {
+                                return '<span class="label label-primary">yes</span>';
+                            }
+                        }
                     }, 
                     {
                         field: 'status',
                         title: '设备状态',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function(value,row,index){
+                            if (value == "Offline") {
+                                return '<span class="label label-danger">Offline</span>';
+                            }else {
+                                return '<span class="label label-primary">Online</span>';
+                            }
+                        }                        
                     },                     
                     {
                         field: 'updateResultReport',
-                        title: '更新结果报告',
-                        align: 'center'
+                        title: '验证状态',
+                        align: 'center',
+                        formatter: function(value,row,index){
+                            if (value == "未验证") {
+                                return '<span class="label label-danger">未验证</span>';
+                            }else {
+                                return '<span class="label label-primary">已验证</span>';
+                            }
+                        }                         
                     },                     
                     {
                         field: 'updateLog',
@@ -308,7 +329,7 @@
                     },                       
                     {
                         field: 'updateTime',
-                        title: '更新时间',
+                        title: '上次登录时间',
                         align: 'center',
                         formatter:function(value,row,index){
                             return formatDateTime(value);

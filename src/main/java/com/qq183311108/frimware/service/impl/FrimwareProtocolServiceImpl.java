@@ -61,7 +61,7 @@ public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
 		// 记录固件更新日志
     	FrimwareUpdateLog log = new FrimwareUpdateLog();
     	log.setId(frimwareUpdateLog.getId());
-    	log.setUpdateResultReport("Initial");
+    	log.setUpdateResultReport("已验证");
     	log.setStatus("Online");
     	log.setGetNewVerTime(new Date());
 		frimwareUpdateLogServiceImpl.updateById(log);
@@ -79,7 +79,7 @@ public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
 		// 记录固件更新日志
     	FrimwareUpdateLog log = new FrimwareUpdateLog();
     	log.setId(frimwareUpdateLog.getId());
-    	log.setUpdateResultReport(1==firmwareUpdateLogDto.getUpdateReport()?"Success":"Fail");
+    	//log.setUpdateResultReport(1==firmwareUpdateLogDto.getUpdateReport()?"Success":"Fail");
     	log.setStatus("Offline");
     	log.setVer(firmwareUpdateLogDto.getCurrVer());
     	log.setUpdateTime(new Date());

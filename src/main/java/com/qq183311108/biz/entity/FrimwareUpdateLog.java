@@ -54,7 +54,7 @@ public class FrimwareUpdateLog extends Model<FrimwareUpdateLog> {
      */
 	private String ver;
     /**
-     * 更新结果报告（initial success fail）
+     * 更新结果报告（ 未验证/已验证）
      */
 	@TableField("update_result_report")
 	private String updateResultReport;
