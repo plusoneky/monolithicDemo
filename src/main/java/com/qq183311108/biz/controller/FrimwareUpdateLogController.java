@@ -307,10 +307,28 @@ public class FrimwareUpdateLogController extends BaseController {
 			return renderError("请选择数据");
 		}
 		String[] split = id.split(",");
-		List<String> userId = new ArrayList<String>();
+		List<String> terminalsId = new ArrayList<String>();
 		for (String item : split) {
-			userId.add(item);
+			terminalsId.add(item);
 		}
-		return this.frimwareUpdateLogImpl.deleteBatchIds(userId) ? renderSuccess("删除成功") : renderError("删除失败");
+		return this.frimwareUpdateLogImpl.deleteBatchIds(terminalsId) ? renderSuccess("删除成功") : renderError("删除失败");
 	}
+	
+	@RequiresPermissions({ "biz.log:batchallow" })
+	@ResponseBody
+	@PostMapping({ "/batchallow" })
+	public JsonResult batchallow(@RequestParam(value = "id", required = false) String id) {
+		if (StringUtil.isEmpty(id)) {
+			return renderError("请选择数据");
+		}
+		String[] split = id.split(",");
+		List<FrimwareUpdateLog> terminalList = new ArrayList<FrimwareUpdateLog>();
+		for (String item : split) {
+			FrimwareUpdateLog log = new FrimwareUpdateLog();
+			log.setId(Long.valueOf(item));
+			log.setFlag("yes");
+			terminalList.add(log);
+		}
+		return this.frimwareUpdateLogImpl.updateBatchById(terminalList)? renderSuccess("批量设置允许更新成功") : renderError("批量设置允许更新失败");
+	}	
 }
