@@ -116,16 +116,16 @@ public class FirmwareVersionController extends BaseController {
 	public JsonResult addFirmwareVersion(@ApiParam(required = true, value = "版本号标识") String newVer,
 			@ApiParam(required = true, value = "解压密码") String unzipPwd,
 			@ApiParam(required = true, value = "设备类型") String typeName,
-			@ApiParam(required = true, value = "版本安装文件") MultipartFile verFile) {
-		if ((StringUtils.isBlank(newVer)) || (StringUtils.isBlank(unzipPwd)) || (StringUtils.isBlank(typeName))) {
+			@ApiParam(required = true, value = "版本安装文件") MultipartFile addVerFile) {
+		if (StringUtils.isBlank(newVer) || StringUtils.isBlank(unzipPwd) || StringUtils.isBlank(typeName)) {
 			return renderError("必填的参数不能为空");
 		}
-		if ((verFile == null) || (verFile.getSize() <= 0L)) {
+		if ((addVerFile == null) || (addVerFile.getSize() <= 0L)) {
 			return renderError("上传文件不能为空");
 		}
 		FileStoreInfoVO fileStoreInfoVO = null;
 		try {
-			fileStoreInfoVO = this.uploadFileServiceImpl.uploadFile(verFile, UploadFileType.APK);
+			fileStoreInfoVO = this.uploadFileServiceImpl.uploadFile(addVerFile, UploadFileType.APK);
 		} catch (Exception e) {
 			return renderError("上传文件错误");
 		}
@@ -154,22 +154,22 @@ public class FirmwareVersionController extends BaseController {
 	@ApiOperation(value = "修改固件版本", notes = "上传的文件后面也要限制大小", response = JsonResult.class, httpMethod = "POST")
 	@PostMapping(value = { "/updateFirmwareVersion" }, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE }, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public JsonResult updateFirmwareVersion(@ApiParam(required = true, value = "版本ID") String id,
-			@ApiParam(required = false, value = "版本号标识") String newVer,
-			@ApiParam(required = false, value = "解压密码") String unzipPwd,
-			@ApiParam(required = false, value = "版本安装文件") MultipartFile verFile) {
-		if (StringUtils.isBlank(id)) {
+	public JsonResult updateFirmwareVersion(@ApiParam(required = true, value = "版本ID") String verId,
+			@ApiParam(required = false, value = "版本号标识") String updateNewVer,
+			@ApiParam(required = false, value = "解压密码") String updateUnzipPwd,
+			@ApiParam(required = false, value = "版本安装文件") MultipartFile updateVerFile) {
+		if (StringUtils.isBlank(verId)) {
 			return renderError("必填的参数id不能为空");
 		}
-		if ((StringUtils.isBlank(newVer)) && (StringUtils.isBlank(unzipPwd)) && (verFile == null)) {
+		if ((StringUtils.isBlank(updateNewVer)) && (StringUtils.isBlank(updateUnzipPwd)) && (updateVerFile == null)) {
 			return renderError("要修改的数据不能全部为空");
 		}
 		FirmwareVersion firmwareVersion = new FirmwareVersion();
-		firmwareVersion.setId(Long.valueOf(id));
+		firmwareVersion.setId(Long.valueOf(verId));
 		FileStoreInfoVO fileStoreInfoVO = null;
-		if ((verFile != null) && (StringUtils.isNotBlank(verFile.getOriginalFilename())) && (verFile.getSize() > 0L)) {
+		if ((updateVerFile != null) && (StringUtils.isNotBlank(updateVerFile.getOriginalFilename())) && (updateVerFile.getSize() > 0L)) {
 			try {
-				fileStoreInfoVO = this.uploadFileServiceImpl.uploadFile(verFile, UploadFileType.APK);
+				fileStoreInfoVO = this.uploadFileServiceImpl.uploadFile(updateVerFile, UploadFileType.APK);
 			} catch (Exception e) {
 				return renderError("上传文件错误");
 			}
@@ -182,11 +182,11 @@ public class FirmwareVersionController extends BaseController {
 		firmwareVersion.setModifyOperatorId(getCurrentLoginId());
 		firmwareVersion.setModifyOperator(getCurrentLoginUsername());
 		firmwareVersion.setModifyTime(new Date());
-		if (StringUtils.isNotBlank(newVer)) {
-			firmwareVersion.setNewVer(newVer.toLowerCase());
+		if (StringUtils.isNotBlank(updateNewVer)) {
+			firmwareVersion.setNewVer(updateNewVer.toLowerCase());
 		}
-		if (StringUtils.isNotBlank(unzipPwd)) {
-			firmwareVersion.setUnzipPwd(unzipPwd);
+		if (StringUtils.isNotBlank(updateUnzipPwd)) {
+			firmwareVersion.setUnzipPwd(updateUnzipPwd);
 		}
 		return this.firmwareVersionServiceImpl.updateById(firmwareVersion) ? renderSuccess("修改成功")
 				: renderError("修改失败");

@@ -78,15 +78,16 @@
 $("#file-4").fileinput({
 	language : "zh",
 	enctype:'multipart/form-data',
-	uploadUrl: 'http://127.0.0.1/biz/f_ver/test_upload',
+	uploadUrl: 'http://static.testcors.com:8080/biz/f_ver/test_upload',
 	uploadAsync: true, //默认异步上传
     theme: 'fa',
     uploadExtraData: {test: '100'},
 	maxFileCount: 1,//最大上传文件数限制
 	allowedFileExtensions : ['jpg', 'png','gif','txt','zip','ico','jpeg','js','css','mp3','mp4','doc','docx','tar.gz'],//允许的文件类型
-	maxFileSize: 15,//文件的最大大小 单位是k
+	maxFileSize: 300000,//文件的最大大小 单位是k
 	showPreview: true, //是否显示预览
 	showUpload: true,
+	elErrorContainer: '#kartik-file-errors',
 	layoutTemplates:{
 		actionDelete:'',
 		actionUpload:'',
@@ -106,7 +107,7 @@ $("#file-4").on('click', function () {
     //$("#file-4").fileinput('refresh', {uploadClass: 'btn btn-default btn-secondary fileinput-upload fileinput-upload-button'});
 });
 
-// 浏览图片后出发
+// 浏览选择图片后触发
 $("#file-4").on('filebatchselected', function(event, data, msg) {
 	if(data==null || data==undefined || data==""){
 		$('.fileinput-upload').addClass("kv-hidden");
