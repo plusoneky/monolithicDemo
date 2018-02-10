@@ -53,6 +53,9 @@ spring:
       #连接超时时间（毫秒）
       timeout: 0
       #分布式session共享并支持跨域
+  data: 
+    mongodb: 
+      uri: mongodb://root:testTHQZqaz123888@39.108.61.183:27017/thqzlog
 
 #MyBatis
 mybatis-plus:
