@@ -99,3 +99,5 @@ bizProperties:
 sysProperties:  
   minRequestIntervalTime: 100000
   maxMaliciousTimes: 100000
+
+  
