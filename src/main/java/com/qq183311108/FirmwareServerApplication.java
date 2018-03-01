@@ -15,7 +15,7 @@ public class FirmwareServerApplication {
 		MultipartConfigFactory foctory = new MultipartConfigFactory();
 		foctory.setLocation("/tmp");
 		return foctory.createMultipartConfig();
-	}
+	}    
 	
 	
 	public static void main(String[] args) {
