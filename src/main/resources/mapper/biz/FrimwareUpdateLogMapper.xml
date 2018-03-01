@@ -19,6 +19,7 @@
         <result column="import_time" property="importTime" />
         <result column="flag" property="flag" />
         <result column="get_new_ver_time" property="getNewVerTime" />
+        <result column="first_login_time" property="firstLoginTime" />
     </resultMap>
 
 </mapper>
