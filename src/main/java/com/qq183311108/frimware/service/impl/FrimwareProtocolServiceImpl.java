@@ -59,11 +59,16 @@ public class FrimwareProtocolServiceImpl implements IFrimwareProtocolService{
 			throw new MyException(FrimwareProtocolServiceErrCode.FrimwareNewVersionIsNotExist);
 		}
 		// 记录固件更新日志
+		Date now = new Date();
     	FrimwareUpdateLog log = new FrimwareUpdateLog();
     	log.setId(frimwareUpdateLog.getId());
     	log.setUpdateResultReport("已验证");
     	log.setStatus("Online");
-    	log.setGetNewVerTime(new Date());
+    	log.setGetNewVerTime(now);
+    	if(frimwareUpdateLog.getFirstLoginTime()==null){
+    		log.setFirstLoginTime(now);
+    	}
+    	
 		frimwareUpdateLogServiceImpl.updateById(log);
 		
 		return firmwareVersion;

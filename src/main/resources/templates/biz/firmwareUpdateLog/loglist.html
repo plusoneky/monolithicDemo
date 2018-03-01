@@ -333,10 +333,18 @@
                         formatter:function(value,row,index){
                             return formatDateTime(value);
                         }
-                    },                       
+                    },   
+                    {
+                        field: 'firstLoginTime',
+                        title: '最近一次登入时间',
+                        align: 'center',
+                        formatter:function(value,row,index){
+                            return formatDateTime(value);
+                        }
+                    },                     
                     {
                         field: 'updateTime',
-                        title: '上次登录时间',
+                        title: '最近一次登入时间',
                         align: 'center',
                         formatter:function(value,row,index){
                             return formatDateTime(value);

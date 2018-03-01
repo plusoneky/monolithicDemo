@@ -87,7 +87,11 @@ public class FrimwareUpdateLog extends Model<FrimwareUpdateLog> {
      */
 	@TableField("get_new_ver_time")
 	private Date getNewVerTime;
-
+    /**
+     * 首次登入时间
+     */
+	@TableField("first_login_time")
+	private Date firstLoginTime;
 
 	public Long getId() {
 		return id;
@@ -207,6 +211,14 @@ public class FrimwareUpdateLog extends Model<FrimwareUpdateLog> {
 
 	public void setGetNewVerTime(Date getNewVerTime) {
 		this.getNewVerTime = getNewVerTime;
+	}	
+
+	public Date getFirstLoginTime() {
+		return firstLoginTime;
+	}
+
+	public void setFirstLoginTime(Date firstLoginTime) {
+		this.firstLoginTime = firstLoginTime;
 	}
 
 	@Override
@@ -232,6 +244,7 @@ public class FrimwareUpdateLog extends Model<FrimwareUpdateLog> {
 			", importTime=" + importTime +
 			", flag=" + flag +
 			", getNewVerTime=" + getNewVerTime +
+			", firstLoginTime=" + firstLoginTime +
 			"}";
 	}
 }
