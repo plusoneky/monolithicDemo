@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class FirmwareServerApplication {
 
-//	@Bean
-//	MultipartConfigElement multipartConfigElement(){
-//		MultipartConfigFactory foctory = new MultipartConfigFactory();
-//		foctory.setLocation("/tmp");
-//		return foctory.createMultipartConfig();
-//	}
+	@Bean
+	MultipartConfigElement multipartConfigElement(){
+		MultipartConfigFactory foctory = new MultipartConfigFactory();
+		foctory.setLocation("/tmp");
+		return foctory.createMultipartConfig();
+	}
 	
 	
 	public static void main(String[] args) {
