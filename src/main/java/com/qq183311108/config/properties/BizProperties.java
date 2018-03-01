@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 @Component  
 @ConfigurationProperties(prefix="bizProperties") //接收application.yml中的bizProperties下面的属性
 public class BizProperties {
+	
+	/**
+	 * 上传文件临时目录
+	 */	
+	private String uploadFileTmpDir;
 
 	/**
 	 * 上传文件目录，不允许远程下载，如Excel文件
@@ -60,5 +65,14 @@ public class BizProperties {
 	public void setFirstClassDomainName(String firstClassDomainName) {
 		this.firstClassDomainName = firstClassDomainName;
 	}
+
+	public String getUploadFileTmpDir() {
+		return uploadFileTmpDir;
+	}
+
+	public void setUploadFileTmpDir(String uploadFileTmpDir) {
+		this.uploadFileTmpDir = uploadFileTmpDir;
+	}
+	
 	
 }

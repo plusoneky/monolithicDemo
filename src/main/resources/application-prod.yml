@@ -90,7 +90,8 @@ mybatis-plus:
 logging:
   level: debug
 
-bizProperties:  
+bizProperties:
+  uploadFileTmpDir: /tmp    
   uploadFileAbsDir: /var/uploaddir
   updownFileAbsDir: /var/uploaddownloaddir/updown/
   updownPrefixURL: https://39.108.61.183/updown
