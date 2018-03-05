@@ -94,7 +94,7 @@ bizProperties:
   uploadFileTmpDir: /tmp    
   uploadFileAbsDir: /var/uploaddir
   updownFileAbsDir: /var/uploaddownloaddir/updown/
-  updownPrefixURL: https://39.108.61.183/updown
+  updownPrefixURL: https://uf.tzzhcom.com/updown
   firstClassDomainName: uf.tzzhcom.com
     
 sysProperties:  
