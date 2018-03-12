@@ -88,14 +88,17 @@ mybatis-plus:
     cache-enabled: false
 
 #logging
-logging:
-  level: debug
+logging: 
+  level: 
+    com.qq183311108: DEBUG
+    root: DEBUG
+  path: ./logs/
 
 bizProperties:
   uploadFileTmpDir: D:/tmp  
   uploadFileAbsDir: E:/uploaddir
   updownFileAbsDir: E:/uploaddownloaddir/updown/
-  updownPrefixURL: https://127.0.0.1/updown
+  updownPrefixURL: http://127.0.0.1/updown
   firstClassDomainName: 127.0.0.1
   
 sysProperties:  

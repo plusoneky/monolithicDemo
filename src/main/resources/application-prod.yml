@@ -87,14 +87,17 @@ mybatis-plus:
     cache-enabled: false
 
 #logging
-logging:
-  level: debug
+logging: 
+  level: 
+    com.qq183311108: DEBUG
+    root: DEBUG
+  path: ./logs/
 
 bizProperties:
   uploadFileTmpDir: /tmp    
   uploadFileAbsDir: /var/uploaddir
   updownFileAbsDir: /var/uploaddownloaddir/updown/
-  updownPrefixURL: https://uf.tzzhcom.com/updown
+  updownPrefixURL: http://uf.tzzhcom.com/updown
   firstClassDomainName: uf.tzzhcom.com
     
 sysProperties:  
