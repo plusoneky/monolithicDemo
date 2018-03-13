@@ -62,7 +62,18 @@ public class UserController extends BaseController {
     	this.iUserService = iUserService;
     	this.iRoleService = iRoleService;
     }
-
+      
+    /**
+     * 用户列表页面
+     * @return
+     */
+    @RequiresPermissions("sys.user:list")
+    @ResponseBody
+    @GetMapping(value = "/me")
+    public User me() {
+        return getCurrentUser();
+    }
+    
     /**
      * 用户列表页面
      * @return

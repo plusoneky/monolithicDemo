@@ -197,10 +197,11 @@
                     <include>**/*.properties</include>  
                 </includes>  
                 <excludes>
-                    <exclude>**/**/application*.yml</exclude>
+                    <exclude>**/**/application-prod*.yml</exclude>
                 </excludes>
             </resource> 
 		</resources>	
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

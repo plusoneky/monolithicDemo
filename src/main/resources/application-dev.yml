@@ -87,13 +87,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
-#logging
-logging: 
-  level: 
-    com.qq183311108: DEBUG
-    root: DEBUG
-  path: ./logs/
-
 bizProperties:
   uploadFileTmpDir: D:/tmp  
   uploadFileAbsDir: E:/uploaddir
