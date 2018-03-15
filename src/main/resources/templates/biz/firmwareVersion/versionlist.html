@@ -55,12 +55,18 @@
                 <div class="row row-lg">
 
                     <div class="example" style="margin-top: -10px;">
+                   
+                   
                         <div class="btn-group hidden-xs" id="toolbar" role="group">
                             <@shiro.hasPermission name="biz.version:add">
                             <button type="button" class="btn btn-outline btn-default" data-toggle="modal" data-target="#addModal">
                                 <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                                 添加
                             </button>
+                           <div class="pull-right search" style="margin-left: 10px;margin-top: -5px;">
+                           	<input class="form-control input-outline" type="text" placeholder="搜索">
+                           </div>
+                           
                             </@shiro.hasPermission>
                             <@shiro.hasPermission name="biz.version:update">
                             <button type="button" class="btn btn-outline btn-default" id="updateButton">
