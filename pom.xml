@@ -166,19 +166,19 @@
 		    <groupId>com.github.crab2died</groupId>
 		    <artifactId>Excel4J</artifactId>
 		    <version>2.1.2</version>
-		</dependency>	
+		</dependency>
 
 		<dependency>
 		    <groupId>cz.mallat.uasparser</groupId>
 		    <artifactId>uasparser</artifactId>
 		    <version>0.6.2</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-compress</artifactId>
 		    <version>1.15</version>
-		</dependency>								
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -191,19 +191,18 @@
 					<include>**/*.xml</include>
 				</includes>
 			</resource>
-			<resource>  
-                <directory>src/main/resources</directory>  
-                <includes>  
-                    <include>**/*.xml</include>  
-                    <include>**/*.properties</include>  
-                </includes>  
+			<resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
                 <excludes>
-                    <exclude>**/**/application-prod.yml</exclude>
+                    <exclude>**/**/*.yml</exclude>
                 </excludes>
-            </resource> 
-		</resources>	
+            </resource>
+		</resources>
 		-->
-
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
