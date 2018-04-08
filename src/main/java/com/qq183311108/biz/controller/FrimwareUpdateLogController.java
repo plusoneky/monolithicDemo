@@ -123,6 +123,10 @@ public class FrimwareUpdateLogController extends BaseController {
 			HashSet<String> snSet = new HashSet<String>();
 			HashSet<String> macSet = new HashSet<String>();
 			for (FrimwareInfoExcelVO excelTerminalVO : excelList) {
+				if(excelTerminalVO ==null || StringUtils.isBlank(excelTerminalVO.getSn())){
+					continue;
+				}
+				
 				boolean addResult = set.add(excelTerminalVO.getTypeName());
 				if (addResult) {
 					typeNameListStr = typeNameListStr + "," + excelTerminalVO.getTypeName();
