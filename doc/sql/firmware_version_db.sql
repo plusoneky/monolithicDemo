@@ -151,11 +151,7 @@ CREATE TABLE `role_permission` (
 -- ----------------------------
 -- Records of role_permission
 -- ----------------------------
-INSERT INTO `role_permission` VALUES ('209', '9', '10', '2017-12-26 18:23:56', null);
-INSERT INTO `role_permission` VALUES ('210', '9', '23', '2017-12-26 18:23:56', null);
-INSERT INTO `role_permission` VALUES ('211', '9', '25', '2017-12-26 18:23:56', null);
-INSERT INTO `role_permission` VALUES ('212', '9', '26', '2017-12-26 18:23:56', null);
-INSERT INTO `role_permission` VALUES ('213', '9', '27', '2017-12-26 18:23:56', null);
+
 INSERT INTO `role_permission` VALUES ('371', '2', '33', '2018-02-07 16:43:29', null);
 INSERT INTO `role_permission` VALUES ('372', '2', '35', '2018-02-07 16:43:29', null);
 INSERT INTO `role_permission` VALUES ('373', '2', '36', '2018-02-07 16:43:29', null);
@@ -181,32 +177,6 @@ INSERT INTO `role_permission` VALUES ('392', '2', '29', '2018-02-07 16:43:29', n
 INSERT INTO `role_permission` VALUES ('393', '2', '30', '2018-02-07 16:43:29', null);
 INSERT INTO `role_permission` VALUES ('394', '2', '31', '2018-02-07 16:43:29', null);
 INSERT INTO `role_permission` VALUES ('395', '2', '40', '2018-02-07 16:43:29', null);
-INSERT INTO `role_permission` VALUES ('396', '10', '10', '2018-02-07 16:43:44', null);
-INSERT INTO `role_permission` VALUES ('397', '10', '24', '2018-02-07 16:43:44', null);
-INSERT INTO `role_permission` VALUES ('398', '10', '28', '2018-02-07 16:43:44', null);
-INSERT INTO `role_permission` VALUES ('399', '10', '29', '2018-02-07 16:43:44', null);
-INSERT INTO `role_permission` VALUES ('400', '10', '30', '2018-02-07 16:43:44', null);
-INSERT INTO `role_permission` VALUES ('401', '10', '31', '2018-02-07 16:43:44', null);
-INSERT INTO `role_permission` VALUES ('402', '10', '40', '2018-02-07 16:43:44', null);
-INSERT INTO `role_permission` VALUES ('403', '11', '1', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('404', '11', '2', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('405', '11', '17', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('406', '11', '18', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('407', '11', '19', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('408', '11', '20', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('409', '11', '21', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('410', '11', '3', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('411', '11', '10', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('412', '11', '23', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('413', '11', '25', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('414', '11', '26', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('415', '11', '27', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('416', '11', '24', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('417', '11', '28', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('418', '11', '29', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('419', '11', '30', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('420', '11', '31', '2018-02-07 16:43:53', null);
-INSERT INTO `role_permission` VALUES ('421', '11', '40', '2018-02-07 16:43:53', null);
 
 -- ----------------------------
 -- Table structure for user
@@ -248,11 +218,6 @@ CREATE TABLE `user_role` (
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES ('29', '125', '10', '2017-12-07 15:33:05', null);
-INSERT INTO `user_role` VALUES ('35', '119', '9', '2017-12-27 19:06:40', null);
-INSERT INTO `user_role` VALUES ('36', '119', '10', '2017-12-27 19:06:40', null);
-INSERT INTO `user_role` VALUES ('37', '119', '11', '2017-12-27 19:06:40', null);
+
 INSERT INTO `user_role` VALUES ('40', '2', '2', '2017-12-27 19:08:03', null);
-INSERT INTO `user_role` VALUES ('44', '128', '9', '2017-12-29 09:45:55', null);
-INSERT INTO `user_role` VALUES ('45', '128', '10', '2017-12-29 09:45:55', null);
-INSERT INTO `user_role` VALUES ('46', '128', '11', '2017-12-29 09:45:55', null);
+
