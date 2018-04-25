@@ -72,6 +72,9 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/admin/isUsername/**", "anon"); // 判断用户名是否存在
         filterChainDefinitionMap.put("/admin/isEmail/**", "anon"); // 判断邮箱是否存在
 
+        filterChainDefinitionMap.put("/test*/**", "anon");
+        filterChainDefinitionMap.put("/admin/myloginAjax", "anon");
+        
         //swagger
 		filterChainDefinitionMap.put("/*/api-docs", "anon");
 		filterChainDefinitionMap.put("/swagger*", "anon");

@@ -245,5 +245,35 @@ public class IndexController extends BaseController {
             return renderError("邮箱发送失败,请重新获取");
         }
     }
+    
+    /**
+     * 登陆提交页面
+     * @param username
+     * @param password
+     * @param map
+     * @return
+     */
+    @PostMapping("/myloginAjax")
+    @ResponseBody
+    
+    public JsonResult myloginAjax(String username, String password) {
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            String simpleName = e.getClass().getSimpleName();
+            if ("UnknownAccountException".equals(simpleName)) {
+                return renderError("用户不存在");
+            } else if("IncorrectCredentialsException".equals(simpleName)){
+                return renderError("密码不正确");
+            }
+        }
+        boolean authenticated = subject.isAuthenticated();
+        if (authenticated) {
+            return renderSuccess("登录成功，可以跳转到首页");
+        }
+        return renderSuccess("登录失败");
+    }      
    
 }
