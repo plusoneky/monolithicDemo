@@ -271,7 +271,7 @@ public class IndexController extends BaseController {
         }
         boolean authenticated = subject.isAuthenticated();
         if (authenticated) {
-            return renderSuccess("登录成功，可以跳转到首页");
+            return renderSuccess("登录成功，id="+subject.getSession().getId().toString());
         }
         return renderSuccess("登录失败");
     }      

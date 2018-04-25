@@ -165,18 +165,18 @@ public class MyKickoutSessionControlFilter extends AccessControlFilter {
 	protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		
+		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+		response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
+		response.setHeader("Access-Control-Allow-Headers","origin,x-requested-with,content-type,Accept,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID,Authorization");
+		response.setHeader("Access-Control-Max-Age", "3628800");
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+		
 		if (request.getMethod().equals(RequestMethod.OPTIONS.name())) {
-			response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-			response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
-			response.setHeader("Access-Control-Allow-Headers",
-					"origin,x-requested-with,content-type,Accept,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID,Authorization");
-			response.setHeader("Access-Control-Max-Age", "3628800");
-			response.setHeader("Access-Control-Allow-Credentials", "true");
-
 			response.setStatus(HttpStatus.OK.value());
 			return false;
+		}else{
+			return super.preHandle(request, response);
 		}
-
-		return super.preHandle(request, response);
 	}
 }

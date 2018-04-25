@@ -34,12 +34,6 @@ public class MaliciousRequestInterceptor extends BaseInterceptor {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-		response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
-		response.setHeader("Access-Control-Allow-Headers","origin,x-requested-with,content-type,Accept,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID,Authorization"); //, x-requested-with,Access-Control-Allow-Origin,EX-SysAuthToken,EX-JSESSIONID
-		response.setHeader("Access-Control-Max-Age", "3628800");
-        response.setHeader("Access-Control-Allow-Credentials","true");	
-
 		String url = request.getServletPath();
 		if (url.endsWith("/unauthorized") || url.endsWith("/forbidden")) {
 			return super.preHandle(request, response, handler);
