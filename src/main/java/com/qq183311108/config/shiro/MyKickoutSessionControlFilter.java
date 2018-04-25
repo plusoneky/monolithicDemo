@@ -160,6 +160,7 @@ public class MyKickoutSessionControlFilter extends AccessControlFilter {
 
 	/* 
 	 * 为了支持CORS跨域
+	 * Access-Control-Allow-Origin: * 允许任何来自任意域的跨域请求，那么就存在被 DDoS攻击的可能
 	 */
 	@Override
 	protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
