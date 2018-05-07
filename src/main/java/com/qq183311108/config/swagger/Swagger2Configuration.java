@@ -19,8 +19,8 @@ public class Swagger2Configuration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.qq183311108.frimware.controller"))
-                //.apis(RequestHandlerSelectors.basePackage("com.qq183311108.biz.controller"))
+                //.apis(RequestHandlerSelectors.basePackage("com.qq183311108.frimware.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.qq183311108.biz.controller"))
                 //.apis(RequestHandlerSelectors.basePackage("com.qq183311108.sys.controller"))
                 .paths(PathSelectors.any())
                 .build();

@@ -96,6 +96,8 @@ public class ShiroRedisCacheConfiguration {
         filterChainDefinitionMap.put("/admin/isEmail/**", "anon"); // 判断邮箱是否存在
 
         filterChainDefinitionMap.put("/test*/**", "anon");
+        filterChainDefinitionMap.put("/biz/f_ver/test_upload", "anon");
+        
         filterChainDefinitionMap.put("/admin/myloginAjax", "anon");
         
         //swagger

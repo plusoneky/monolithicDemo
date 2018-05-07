@@ -212,7 +212,7 @@ public class FirmwareVersionController extends BaseController {
 			"上传文件" }, response = JsonResult.class, httpMethod = "POST")
 	@RequestMapping(value = { "/test_upload" }, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }, consumes = {
 			MediaType.MULTIPART_FORM_DATA_VALUE })
-	public JsonResult testUpload(@ApiParam(required = true, value = "test") String test,
+	public JsonResult testUpload(@RequestParam @ApiParam(required = true, value = "test") String test,
 			@ApiParam(required = true, value = "通过上传文件") MultipartFile multipartFile) {
 		FileStoreInfoVO fileStoreInfoVO = null;
 		try {
