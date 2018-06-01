@@ -7,15 +7,22 @@ import java.util.Map;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.Cookie;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
+
+import com.qq183311108.config.properties.BizProperties;
 
 /**
  * Author: qq183311108
@@ -31,6 +38,9 @@ public class ShiroConfiguration {
 
     private static final transient Logger log = LoggerFactory.getLogger(ShiroConfiguration.class);
 
+	@Autowired
+	private BizProperties bizProperties;
+	
     /**
      *  Shiro 过滤器
      * @param securityManager
@@ -108,6 +118,7 @@ public class ShiroConfiguration {
         //设置realm
         securityManager.setRealm(myShiroRealm());
         securityManager.setCacheManager(ehCacheManager());
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
@@ -182,5 +193,22 @@ public class ShiroConfiguration {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
+    
+    @Bean
+    public SessionManager sessionManager(){
+    	DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+    	sessionManager.setGlobalSessionTimeout(604800000);
+    	sessionManager.setSessionIdCookie(sessionIdCookie());
+    	sessionManager.setSessionValidationSchedulerEnabled(true);
+    	return sessionManager;
+    }     
+    
+    @Bean
+    public Cookie sessionIdCookie(){
+    	SimpleCookie sessionIdCookie = new SimpleCookie();
+    	sessionIdCookie.setDomain(bizProperties.getFirstClassDomainName());
+    	sessionIdCookie.setName("accessFirmToken");
+		return sessionIdCookie;
+    }    
 
 }
