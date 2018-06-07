@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.qq183311108</groupId>
-	<artifactId>firmware-server</artifactId>
+	<artifactId>monolithicDemo</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
