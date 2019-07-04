@@ -23,7 +23,6 @@ public class FirmwareServerApplication {
 		return foctory.createMultipartConfig();
 	}    
 	
-	
 	public static void main(String[] args) {
 		SpringApplication.run(FirmwareServerApplication.class, args);
 	}

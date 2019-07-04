@@ -14,7 +14,7 @@ public class StateMachineEventConfig {
     
     @OnTransition(target = "STATES_0")
     public void toState0(Message message) {
-    	logger.info("s0 ttttttttttttttttttttttttttt"+"---header:"+message.getHeaders()+",---payload:"+message.getPayload());
+    	logger.info("s0 ttttttttttttttttttttttttttt"+"---message:"+message);
     }
     
     @OnTransition(source="STATES_0",target = "STATES_1")
