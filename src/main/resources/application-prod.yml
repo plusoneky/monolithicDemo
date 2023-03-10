@@ -11,7 +11,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.108.61.183:3306/firmware_version_db?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.0.62:3306/firmware_version_db?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: RRPHqwe#913
   mail:
@@ -36,7 +36,7 @@ spring:
     #Redis数据库索引（默认为0）
     database: 0
     #Redis服务器地址
-    host: 39.108.61.183
+    host: 192.168.0.62
     #Redis服务器连接端口
     port: 6379
     #Redis服务器连接密码（默认为空）
@@ -55,7 +55,7 @@ spring:
       #分布式session共享并支持跨域
   data: 
     mongodb: 
-      uri: mongodb://root:testTHQZqaz123888@39.108.61.183:27017/thqzlog
+      uri: mongodb://root:testTHQZqaz123888@192.168.0.62:27017/thqzlog
 
 #MyBatis
 mybatis-plus:
