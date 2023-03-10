@@ -1,0 +1,680 @@
+<#include "/lib/lib.html">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>版本管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="${request.contextPath}/favicon.ico">
+    
+    <link href="${request.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${request.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+   
+    <!-- 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+     -->
+    <link href="${request.contextPath}/css/animate.css" rel="stylesheet">
+    <link href="${request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/plugins/bootstrap-validator/bootstrapValidator.min.css">
+    <link href="${request.contextPath}/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <style>
+        .form-control:focus,
+        .single-line:focus {
+            border-color: #0e9aef !important;
+        }
+        .checkbox-inline {
+            line-height: 5px;
+        }
+    </style>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+<body class="gray-bg">
+
+    <div class="wrapper wrapper-content">
+
+        <div class="ibox float-e-margins ibox-blue">
+            <div class="ibox-title">
+                <h5>版本管理</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+
+                    <div class="example" style="margin-top: -10px;">
+                   
+                   
+                        <div class="btn-group hidden-xs" id="toolbar" role="group">
+                            <@shiro.hasPermission name="biz.version:add">
+                            <button type="button" class="btn btn-outline btn-default" data-toggle="modal" data-target="#addModal">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                添加
+                            </button>
+                           <!-- 
+                           <div class="pull-right search" style="margin-left: 10px;margin-top: -5px;">
+                           	<input class="form-control input-outline" type="text" placeholder="搜索">
+                           </div>
+                           -->
+                           
+                            </@shiro.hasPermission>
+                            <@shiro.hasPermission name="biz.version:update">
+                            <button type="button" class="btn btn-outline btn-default" id="updateButton">
+                                <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+                                修改
+                            </button>
+                            </@shiro.hasPermission>
+                            <@shiro.hasPermission name="biz.version:delete">
+                            <button type="button" class="btn btn-outline btn-default" id="deleteButton">
+                                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                删除
+                            </button>
+                            </@shiro.hasPermission>
+                        </div>
+                        <table id="firmwareVersionTableEvents"></table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <@modal "添加版本" "addModal" "addForm">
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备类型标识</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="addTypeName" id="addTypeName" placeholder="请输入设备类型标识">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">版本号标识</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="addNewVer" id="addNewVer" autocomplete="off" placeholder="请输入版本号标识">
+	            </div>
+	        </div>
+	        
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">版本文件</label>
+	            <div class="col-sm-10">
+		            <div class="file-loading">
+		                <input type="file" name="addVerFile" id="addVerFile" class="form-control file" data-msg-placeholder="请选择版本文件">
+		            </div>	            
+	            </div>
+	            <div id="add-kartik-file-errors"></div>
+	        </div>	        
+	        
+	        <!-- 
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">版本文件</label>
+	            <div class="col-sm-10">
+	                <input type="file" name="verFile" placeholder="请选择版本文件">
+	            </div>
+	        </div>
+	        -->
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">解压密码</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="addUnzipPwd" id="addUnzipPwd" placeholder="请输入解压密码">
+	            </div>
+	        </div>
+	        <div id="addServerResponse" name="addServerResponse"></div>    
+    </@modal>
+
+    <@modal "修改版本" "updateModal" "updateForm" >
+        <input type="hidden" name="verId" id="verId">
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">版本号标识</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="updateNewVer" id="updateNewVer" autocomplete="off" placeholder="请输入版本号标识">
+	            </div>
+	        </div>
+	        
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">版本文件</label>
+	            <div class="col-sm-10">
+		            <div class="file-loading">
+		                <input type="file" name="updateVerFile" id="updateVerFile" class="form-control" data-msg-placeholder="请选择版本文件">
+		            </div>	            
+	            </div>
+	            <div id="update-kartik-file-errors"></div>
+	        </div>	        
+	        
+	        <!-- 
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">版本文件</label>
+	            <div class="col-sm-10">
+	                <input type="file" name="verFile" placeholder="请选择版本文件">
+	            </div>
+	        </div>
+	        -->
+	        
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">解压密码</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="updateUnzipPwd" id="updateUnzipPwd" placeholder="请输入解压密码">
+	            </div>
+	        </div>
+	        <div id="updateServerResponse" name="updateServerResponse"></div>    
+    </@modal>
+
+    <!-- 全局js -->
+     
+    <script src="${request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${request.contextPath}/js/bootstrap.min.js?v=3.3.6"></script>
+    
+     <!--
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" type="text/javascript"></script>     
+     -->
+    <!-- layer javascript -->
+    <script src="${request.contextPath}/js/plugins/layer/layer.min.js"></script>
+    <!-- 自定义js -->
+    <script src="${request.contextPath}/js/content.js?v=1.0.0"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="${request.contextPath}/js/plugins/bootstrap-validator/bootstrapValidator.js"></script>
+    <script src="${request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/piexif.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/sortable.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/purify.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/themes/fa/theme.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/locales/zh.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/themes/explorer-fa/theme.js"></script>
+
+    <script>
+	    //添加时传递额外参数
+		var addParameter;
+		function transferAddParameter(newVer,unzipPwd,typeName){
+		    $('#addVerFile').on('filepreajax', function(event, previewId, index) {
+		    	addParameter ={"newVer": newVer,"unzipPwd":unzipPwd,"typeName":typeName};
+		    	//alert("addParameter"+JSON.stringify(addParameter));
+		    });
+		}    
+    
+	    //初始化fileinput控件（第一次初始化）
+	    $('#addVerFile').fileinput({
+	            language: 'zh', //设置语言
+	            uploadUrl: "/biz/f_ver/addFirmwareVersion", //上传的地址
+	            allowedFileExtensions : ["zip", "gz", "img", "apk"],//接收的文件后缀
+	            uploadAsync: false, //是否为异步上传
+	            uploadExtraData:function() {
+	                return addParameter;
+	            },   //{"newVer": "111","unzipPwd":"222","typeName":"333"},
+	            elErrorContainer: '#add-kartik-file-errors',
+	            showUpload: false, //是否显示上传按钮
+	            showCaption: true,//是否显示标题 
+	            showPreview: false, //是否显示预览
+	    });
+	    
+	  //异步上传返回错误结果处理
+	    $('#addVerFile').on('fileerror', function(event, data, msg) {
+	        //alert(msg);
+	        //alert(data.msg);
+	        $('#addServerResponse').html(msg);  
+	    });
+	  
+	    //异步上传返回结果处理
+	    $("#addVerFile").on("fileuploaded", function (event, data, previewId, index) {
+            //alert("data.response="+JSON.stringify(data.response));
+		    //alert("data.success="+JSON.stringify(data.success));
+		    doAddVerSucc(data.response);
+	    });
+
+	    //批量同步上传错误处理
+	    $('#addVerFile').on('filebatchuploaderror', function(event, data, msg) {
+	        //alert(msg);
+	        //alert(data.msg);
+	        $('#addServerResponse').html(msg);  
+	    });
+	    
+	    //批量同步上传成功结果处理
+	    $("#addVerFile").on("filebatchuploadsuccess", function (event, data, previewId, index) {
+            //alert("data.response="+JSON.stringify(data.response));
+		    //alert("data.success="+JSON.stringify(data.success));
+		    doAddVerSucc(data.response);
+	    });	    
+	    
+	    function doAddVerSucc(dataResponse){
+            if (dataResponse.success) {
+                $("#addModal").modal('hide');
+                $("#addForm")[0].reset();
+                $('#firmwareVersionTableEvents').bootstrapTable('refresh');
+                parent.layer.msg(dataResponse.msg, {icon: 1});
+            } else {
+            	$('#addServerResponse').html(dataResponse.msg);  
+                parent.layer.msg(dataResponse.msg, {time: 1500, icon:5});
+            }
+	    }
+
+	    //修改时传递额外参数
+		var updateParameter;
+		function transferUpdateParameter(verId,updateNewVer,updateUnzipPwd){
+		    $('#updateVerFile').on('filepreajax', function(event, previewId, index) {
+		    	updateParameter ={"verId": verId ,"updateNewVer": updateNewVer,"updateUnzipPwd":updateUnzipPwd};
+		    	//alert("updateParameter"+JSON.stringify(updateParameter));
+		    });
+		}
+	    
+	    //初始化fileinput控件（第一次初始化）
+	    $('#updateVerFile').fileinput({
+	            language: 'zh', //设置语言
+	            uploadUrl: "/biz/f_ver/updateFirmwareVersion", //上传的地址
+	            allowedFileExtensions : ["zip", "gz", "img", "apk"],//接收的文件后缀
+	            uploadAsync: false, //是否为异步上传
+	            uploadExtraData: function() {
+	                return updateParameter;
+	            },//{"id":"19","newVer": "ddd","unzipPwd":"222","typeName":"333"},
+	            elErrorContainer: '#update-kartik-file-errors',
+	            showUpload: false, //是否显示上传按钮
+	            showCaption: true,//是否显示标题 
+	            showPreview: false, //是否显示预览
+	            minFileCount: 0,
+	            maxFileCount: 1,
+	            validateInitialCount: true,
+	            msgUploadEmpty: "空文件的不可以",
+	    });
+	    
+	  //异步上传返回错误结果处理
+	    $('#updateVerFile').on('fileerror', function(event, data, msg) {
+	        $('#updateServerResponse').html(msg);  
+	    });
+	  
+	    //异步上传返回结果处理
+	    $("#updateVerFile").on("fileuploaded", function (event, data, previewId, index) {
+	    	doUpdateVerSucc(data.response);
+	    });
+
+	    //批量同步上传错误处理
+	    $('#updateVerFile').on('filebatchuploaderror', function(event, data, msg) {
+	        $('#updateServerResponse').html(msg);  
+	    });
+	    
+	    //批量同步上传成功结果处理
+	    $("#updateVerFile").on("filebatchuploadsuccess", function (event, data, previewId, index) {
+	    	doUpdateVerSucc(data.response);
+	    });	    
+	    
+	    function doUpdateVerSucc(dataResponse){
+             if (dataResponse.success) {
+                $('#updateVerFile').fileinput('clear');
+                $('#updateVerFile').fileinput('reset');            	 
+                $("#updateModal").modal('hide');
+                $("#updateForm")[0].reset();   
+                $('#firmwareVersionTableEvents').bootstrapTable('refresh');  
+                parent.layer.msg(data.msg, {icon: 1});  
+            } else {
+            	$('#updateServerResponse').html(dataResponse.msg);  
+                parent.layer.msg(dataResponse.msg, {time: 1500, icon:5});
+            } 
+	    }	    
+    
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+        //$("#addUserModal").modal();
+        $(function () {
+            $("#firmwareVersionTableEvents").bootstrapTable({
+                url: '/biz/f_ver/getList',
+                method: 'post',
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType:'',//查询参数组织方式
+                queryParams:queryParams,//请求服务器时所传的参数
+                sidePagination:'server',//指定服务器端分页
+                search: true,
+                searchOnEnterKey: true,
+                pagination: true,
+                showRefresh: false,
+                showToggle: true,
+                showColumns: true,
+                striped: true,
+                pagination: true,
+                sortable: false,
+                sortOrder: "asc",
+                clickToSelect: true,
+                pageNumber:1,
+                pageSize: 10,
+                pageList: [10, 30, 50, 100, 500, 'ALL'],
+                iconSize: 'outline',
+                toolbar: '#toolbar',
+                icons: {
+                    refresh: 'glyphicon-repeat',
+                    toggle: 'glyphicon-list-alt',
+                    columns: 'glyphicon-list'
+                },
+                responseHandler:function(res){
+                    //在ajax获取到数据，渲染表格之前，修改数据源
+                    //console.log("收到了数据："+res)
+                    return res;
+                },
+                columns: [
+                    {
+                        title:'全选',
+                        field:'select',
+                        //复选框
+                        checkbox:true,
+                        width:25,
+                        align:'center',
+                        valign:'middle'
+                    },
+                    {
+                        field: 'id',
+                        title: 'ID',
+                        align: 'center'
+                    },
+                    {
+                        field: 'typeName',
+                        title: '设备类型标识',
+                        align: 'center'
+                    },
+                    {
+                        field: 'newVer',
+                        title: '版本号',
+                        align: 'center'
+                    },
+                    {
+                        field: 'unzipPwd',
+                        title: '解压密码',
+                        align: 'center'
+                    },
+                    {
+                        field: 'md5',
+                        title: 'MD5',
+                        align: 'center'
+                    },
+                    {
+                        field: 'firmFilePath',
+                        title: '下载地址',
+                        align: 'center'
+                    },                    
+                    {
+                        field: 'createTime',
+                        title: '创建时间',
+                        align: 'center',
+                        formatter:function(value,row,index){
+                            return formatDateTime(value);
+                        }
+                    },
+                    {
+                        field: 'modifyTime',
+                        title: '编辑时间',
+                        align: 'center',
+                        formatter:function(value,row,index){
+                            return formatDateTime(value);
+                        }
+                    },                    
+                ]
+            });
+
+            //请求服务数据时所传参数
+            function queryParams(params){
+                return{
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    searchText: params.searchText
+                }
+            }
+
+            //添加版本
+            $('#addModal').on('show.bs.modal', function () {
+                $("#addForm").data('bootstrapValidator').destroy();
+                $('#addForm').data('bootstrapValidator', null);
+                addValidator();
+            });
+            addValidator();
+            function addValidator() {
+                $('#addForm').bootstrapValidator({
+                    fields: {
+                        addTypeName: {
+                            validators: {
+                                notEmpty: {
+                                    message: '设备类型标识不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '设备类型标识长度最多30个字符'
+                                },
+                            }
+                        },
+                        addNewVer: {
+                            validators: {
+                                notEmpty: {
+                                    message: '版本号标识不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '版本号标识长度最多30个字符'
+                                },
+                            }
+                        },
+                        addVerFile: {
+                            validators: {
+                                notEmpty: {
+                                    message: '版本文件不能为空'
+                                },
+                                file: {
+                                    extension: 'zip,gz,img,apk',
+                                    //type: 'application/x-gtar,application/x-gzip,application/x-compressed,application/zip,application/x-zip,application/x-zip-compressed,application/octet-stream,application/x-compress',
+                                    maxSize: 300 * 1024 * 1024, // 300 MB
+                                    message: '选择的文件无效, 文件必须是zip,gz,img,apk的压缩包，大小在300MB以内'
+                                }                                
+                            }
+                        },                        
+                        addUnzipPwd: {
+                            validators: {
+                                notEmpty: {
+                                    message: '解压密码不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '解压密码长度最多30个字符'
+                                },
+                            }
+                        }
+                    }
+                }).on('success.form.bv', function(e) {
+                    // Prevent form submission
+                    e.preventDefault();             
+                    transferAddParameter($("#addNewVer").val(),$("#addUnzipPwd").val(),$("#addTypeName").val());
+                    $('#addVerFile').fileinput('upload');
+/* 					var formData = new FormData($( "#addForm" )[0]);  
+					$.ajax({  
+						url: '/biz/f_ver/addFirmwareVersion' ,  
+						type: 'POST',  
+						data: formData,  
+						async: false,  
+						cache: false,  
+						contentType: false,  
+						processData: false,  
+						success: function (data) {  
+                            $("#addModal").modal('hide');
+                            if (data.success) {
+                                $("#addModal").modal('hide');
+                                $("#addForm")[0].reset();
+                                $('#firmwareVersionTableEvents').bootstrapTable('refresh');
+                                parent.layer.msg(data.msg, {icon: 1});
+                            } else {
+                                parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+						},
+				        error: function (data) {  
+				             $( '#addServerResponse').html(data.msg);  
+				        } 						
+					});  */                    
+                });    
+     	  };                 
+                
+                
+
+            //修改版本
+            $("#updateButton").click(function () {
+                var $result = $('#firmwareVersionTableEvents');
+                var list = $result.bootstrapTable('getSelections');
+                if (list.length <= 0 || list.length > 1) {
+                    parent.layer.msg('请选中一条数据', {time: 1500, icon:5});
+                    return;
+                }
+                list = list[0];
+                for (var item in list) {
+                    if (item == 'status') {
+                        continue;
+                    }
+                    if(item == 'newVer'){
+                    	$("#updateModal input[name='updateNewVer']").val(list[item]);
+                    }
+
+                    if(item == 'unzipPwd'){
+                    	$("#updateModal input[name='updateUnzipPwd']").val(list[item]);
+                    }
+                    
+                    if(item == 'verFile'){
+                    	$("#updateModal input[name='updateVerFile']").val(list[item]);
+                    }      
+
+                    if(item == 'id'){
+                    	$("#updateModal input[name='verId']").val(list[item]);
+                    } 
+                    
+                    
+                    //因为这里对添加和修改的表单元素都重命名了，所以要指定
+                    //$("#updateModal input[name='"+item+"']").val(list[item]);
+                }
+                $("#updateModal input[name='status'][value="+list.status+"]").prop("checked",true);
+                $("#updateForm").data('bootstrapValidator').destroy();
+                $('#updateForm').data('bootstrapValidator', null);
+                updateValidator();
+                $("#updateModal").modal("show");
+            });
+            updateValidator();
+            function updateValidator() {
+                $('#updateForm').bootstrapValidator({
+                    fields: {
+                        updateNewVer: {
+                            validators: {
+                                notEmpty: {
+                                    message: '版本号标识不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '版本号标识长度最多30个字符'
+                                },
+                            }
+                        },                    
+                        updateUnzipPwd: {
+                            validators: {
+                                notEmpty: {
+                                    message: '解压密码不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '解压密码长度最多30个字符'
+                                },
+                            }
+                        },
+                        updateVerFile: {
+                            validators: {
+                                file: {
+                                    extension: 'zip,gz,img,apk',
+                                    //type: 'application/x-gtar,application/x-gzip,application/x-compressed,application/zip,application/x-zip,application/x-zip-compressed,application/octet-stream,application/x-compress',
+                                    maxSize: 300 * 1024 * 1024, // 300 MB
+                                    message: '选择的文件无效, 文件扩展名必须是zip,gz,img,apk的安装包，大小在300MB以内'
+                                }                                
+                            }
+                        }                         
+                    }
+                }).on('success.form.bv', function(e) {
+                    // Prevent form submission
+                    e.preventDefault();    
+                    var fileName = $('#updateVerFile').val();
+                    transferUpdateParameter($("#verId").val(),$("#updateNewVer").val(),$("#updateUnzipPwd").val());
+                    if(fileName && fileName!=""){
+                    	$('#updateVerFile').fileinput('upload');         
+                    }else{
+                    	var formData = new FormData($( "#updateForm" )[0]);   //FormData的最大优点就是我们可以异步上传一个二进制文件，所有主流浏览器的较新版本都已经支持这个对象。甚至我们在表单中，都不需要声明enctype ="multipart/form-data"
+    					$.ajax({  
+    						url: '/biz/f_ver/updateFirmwareVersion',  
+    						type: 'POST',  
+    						data: formData,
+    						//data: $("#updateForm").serialize(),  //相比FormData，这样只能传递一般的参数，上传文件的文件流是无法被序列化并传递的
+    						async: false,  
+    						cache: false,  
+    						contentType: false,  
+    						processData: false,                                       
+                            success: function(data){
+                                $("#updateModal").modal('hide');
+                                if (data.success) {
+                                    $("#updateModal").modal('hide');
+                                    $("#updateForm")[0].reset();   
+                                    $('#firmwareVersionTableEvents').bootstrapTable('refresh');                          
+                                    parent.layer.msg(data.msg, {icon: 1});
+                                } else {
+                                    parent.layer.msg(data.msg, {time: 1500, icon:5});
+                                }
+                            },
+    				        error: function (data) {  
+    				             $('#updateServerResponse').html(data.msg);  
+    				        }                         
+                        });                    	
+                    }
+                });
+            }
+
+            //删除版本
+            $("#deleteButton").click(function () {
+                var $result = $('#firmwareVersionTableEvents');
+                var list = $result.bootstrapTable('getSelections');
+                if (list.length <= 0) {
+                    parent.layer.msg('请至少选中一条数据', {time: 1500, icon:5});
+                    return;
+                }
+                var id = "";
+                for (var item in list) {
+                    id += list[item].id+",";
+                }
+                parent.layer.confirm('确定删除选中版本？', {
+                    btn: ['确定','取消'], //按钮
+                    shade: false //不显示遮罩
+                }, function(){
+                    $.ajax({
+                        url: "/biz/f_ver/delete",
+                        data:  {"id": id},
+                        type: "POST",
+                        dataType: 'json',
+                        success: function(data){
+                            if (data.success) {
+                                $('#firmwareVersionTableEvents').bootstrapTable('refresh');
+                                parent.layer.msg(data.msg, {icon: 1});
+                            } else {
+                                parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+                        }
+                    });
+                });
+            });
+
+            /*$('.search').click(function(){
+                $('#firmwareVersionTableEvents').bootstrapTable('refresh');
+            })*/
+        });
+    </script>
+</body>
+</html>

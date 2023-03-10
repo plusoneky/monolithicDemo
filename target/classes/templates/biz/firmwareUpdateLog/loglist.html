@@ -1,0 +1,680 @@
+<#include "/lib/lib.html">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>终端管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="${request.contextPath}/favicon.ico">
+    <link href="${request.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${request.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="${request.contextPath}/css/animate.css" rel="stylesheet">
+    <link href="${request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/plugins/bootstrap-validator/bootstrapValidator.min.css">
+    <link href="${request.contextPath}/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <style>
+        .form-control:focus,
+        .single-line:focus {
+            border-color: #0e9aef !important;
+        }
+        .checkbox-inline {
+            line-height: 5px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+
+    <div class="wrapper wrapper-content">
+
+        <div class="ibox float-e-margins ibox-blue">
+            <div class="ibox-title">
+                <h5>固件管理</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+
+                    <div class="example" style="margin-top: -10px;">
+                        <div class="btn-group hidden-xs" id="toolbar" role="group">
+                            <@shiro.hasPermission name="biz.log:import">
+                            <button type="button" class="btn btn-outline btn-default" data-toggle="modal" data-target="#importModal">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                导入
+                            </button>      
+                            </@shiro.hasPermission>                  
+                            <@shiro.hasPermission name="biz.log:add">
+                            <button type="button" class="btn btn-outline btn-default" id="addButton">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                添加
+                            </button>
+                            </@shiro.hasPermission>
+                            <@shiro.hasPermission name="biz.log:update">
+                            <button type="button" class="btn btn-outline btn-default" id="updateButton">
+                                <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+                                修改
+                            </button>
+                            </@shiro.hasPermission>
+                            <@shiro.hasPermission name="biz.log:delete">
+                            <button type="button" class="btn btn-outline btn-default" id="deleteButton">
+                                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                删除
+                            </button>
+                            </@shiro.hasPermission>
+                            <@shiro.hasPermission name="biz.log:batchallow">
+                            <button type="button" class="btn btn-outline btn-default" id="batchallowButton">
+                                <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+                                批量允许更新
+                            </button>
+                            </@shiro.hasPermission>                            
+                            
+                        </div>
+                        <table id="firmwareLogTableEvents"></table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <@modal "导入终端" "importModal" "importForm">
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">固件信息Excel文件</label>
+	            <div class="col-sm-10">
+	                <input type="file" name="logFile" placeholder="请选择固件信息Excel文件">
+	            </div>
+	        </div>
+	        <div id="importServerResponse" name="importServerResponse"></div>    
+    </@modal>
+
+    <@modal "添加终端" "addModal" "addForm">
+    	<input type="hidden" name="typeName" id="typeName">
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备序列号</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="sn" placeholder="请输入设备序列号">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备网卡地址</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="mac" autocomplete="off" placeholder="请输入设备网卡地址">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备类型标识</label>
+		        <div class="col-sm-10">
+		            <select class="form-control" name="typeId">
+		                <option>11</option>
+		            </select>
+		        </div>	            
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备版本号</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="ver" placeholder="请输入设备版本号">
+	            </div>
+	        </div> 
+	         
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">允许更新</label>
+	            <div class="col-sm-10">
+	                <div class="ui-radio ui-radio-primary">
+	                    <label>
+	                        <input type="radio" name="flag" value="yes" >
+	                        <span>yes</span>
+	                    </label>
+	                    <label>
+	                        <input type="radio" name="flag" value="no" checked="">
+	                        <span>no</span>
+	                    </label>
+	                </div>
+	            </div>
+	        </div>
+	        <div id="addServerResponse" name="addServerResponse"></div>    	         
+    </@modal>
+
+    <@modal "修改终端信息" "updateModal" "updateForm">
+        <input type="hidden" name="id">
+        <input type="hidden" name="typeName" id="typeName">
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备序列号</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="sn" placeholder="请输入设备序列号">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备网卡地址</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="mac" autocomplete="off" placeholder="请输入设备网卡地址">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备类型标识</label>
+		        <div class="col-sm-10">
+		            <select class="form-control" name="typeId">
+		                <option>11</option>
+		            </select>
+		        </div>	  	            
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">设备版本号</label>
+	            <div class="col-sm-10">
+	                <input type="text" class="form-control" name="ver" placeholder="请输入设备版本号">
+	            </div>
+	        </div>
+	         
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">允许更新</label>
+	            <div class="col-sm-10">
+	                <div class="ui-radio ui-radio-primary">
+	                    <label>
+	                        <input type="radio" name="flag" value="yes">
+	                        <span>yes</span>
+	                    </label>
+	                    <label>
+	                        <input type="radio" name="flag" value="no">
+	                        <span>no</span>
+	                    </label>
+	                </div>
+	            </div>
+	        </div>	 
+            <div id="updateServerResponse" name="updateServerResponse"></div>    
+    </@modal>
+
+    <!-- 全局js -->
+    <script src="${request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${request.contextPath}/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- layer javascript -->
+    <script src="${request.contextPath}/js/plugins/layer/layer.min.js"></script>
+    <!-- 自定义js -->
+    <script src="${request.contextPath}/js/content.js?v=1.0.0"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="${request.contextPath}/js/plugins/bootstrap-validator/bootstrapValidator.js"></script>
+    <script src="${request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            setFirmwareTypeSelect();
+        });
+        //$("#addUserModal").modal();
+        $(function () {
+            $("#firmwareLogTableEvents").bootstrapTable({
+                url: '/biz/f_log/getList',
+                method: 'post',
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType:'',//查询参数组织方式
+                queryParams:queryParams,//请求服务器时所传的参数
+                sidePagination:'server',//指定服务器端分页
+                search: true,
+                searchOnEnterKey: true,
+                pagination: true,
+                showRefresh: false,
+                showToggle: true,
+                showColumns: true,
+                striped: true,
+                pagination: true,
+                sortable: false,
+                sortOrder: "asc",
+                clickToSelect: true,
+                pageNumber:1,
+                pageSize: 10,
+                pageList: [10, 30, 50, 100, 500, 'ALL'],
+                iconSize: 'outline',
+                toolbar: '#toolbar',
+                icons: {
+                    refresh: 'glyphicon-repeat',
+                    toggle: 'glyphicon-list-alt',
+                    columns: 'glyphicon-list'
+                },
+                responseHandler:function(res){
+                    //在ajax获取到数据，渲染表格之前，修改数据源
+                    //console.log("收到了数据："+res)
+                    return res;
+                },
+                columns: [
+                    {
+                        title:'全选',
+                        field:'select',
+                        //复选框
+                        checkbox:true,
+                        width:25,
+                        align:'center',
+                        valign:'middle'
+                    },
+                    {
+                        field: 'id',
+                        title: 'ID',
+                        align: 'center'
+                    },
+                    {
+                        field: 'sn',
+                        title: '设备序列号',
+                        align: 'center'
+                    },
+                    {
+                        field: 'mac',
+                        title: '设备网卡地址',
+                        align: 'center'
+                    },
+                    {
+                        field: 'typeName',
+                        title: '设备类型标识',
+                        align: 'center'
+                    },
+                    {
+                        field: 'ver',
+                        title: '设备版本号',
+                        align: 'center'
+                    },                    
+                    {
+                        field: 'flag',
+                        title: '允许更新',
+                        align: 'center',
+                        formatter: function(value,row,index){
+                            if (value == "no") {
+                                return '<span class="label label-danger">no</span>';
+                            }else {
+                                return '<span class="label label-primary">yes</span>';
+                            }
+                        }
+                    }, 
+                    {
+                        field: 'status',
+                        title: '设备状态',
+                        align: 'center',
+                        formatter: function(value,row,index){
+                            if (value == "Offline") {
+                                return '<span class="label label-danger">Offline</span>';
+                            }else {
+                                return '<span class="label label-primary">Online</span>';
+                            }
+                        }                        
+                    },                     
+                    {
+                        field: 'updateResultReport',
+                        title: '验证状态',
+                        align: 'center',
+                        formatter: function(value,row,index){
+                            if (value == "未验证") {
+                                return '<span class="label label-danger">未验证</span>';
+                            }else {
+                                return '<span class="label label-primary">已验证</span>';
+                            }
+                        }                         
+                    },                     
+                    {
+                        field: 'updateLog',
+                        title: '更新日志',
+                        align: 'center'
+                    }, 
+                    {
+                        field: 'importTime',
+                        title: '导入时间',
+                        align: 'center',
+                        formatter:function(value,row,index){
+                            return formatDateTime(value);
+                        }
+                    },   
+                    {
+                        field: 'firstLoginTime',
+                        title: '首次登入时间',
+                        align: 'center',
+                        formatter:function(value,row,index){
+                            return formatDateTime(value);
+                        }
+                    },                     
+                    {
+                        field: 'updateTime',
+                        title: '最近一次登入时间',
+                        align: 'center',
+                        formatter:function(value,row,index){
+                            return formatDateTime(value);
+                        }
+                    },                    
+                ]
+            });
+
+            //请求服务数据时所传参数
+            function queryParams(params){
+                return{
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    searchText: params.searchText
+                }
+            }
+            //导入
+            $('#importModal').on('show.bs.modal', function () {
+                $("#importForm").data('bootstrapValidator').destroy();
+                $('#importForm').data('bootstrapValidator', null);
+                importValidator();
+            });
+            importValidator();
+            function importValidator() {
+                $('#importForm').bootstrapValidator({
+                    fields: {
+                        logFile: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'EXCEL文件不能为空'
+                                },
+                                file: {
+                                    extension: 'xls,xlsx',
+                                    //type: 'application/x-gtar,application/x-gzip,application/x-compressed,application/zip,application/x-zip,application/x-zip-compressed,application/octet-stream,application/x-compress',
+                                    maxSize: 10 * 1024 * 1024, // 10 MB
+                                    message: '选择的文件无效, 文件必须是EXCEL文件，大小在10MB以内'
+                                }                                
+                            }
+                        }                      
+                    }
+                }).on('success.form.bv', function(e) {
+                    // Prevent form submission
+                    e.preventDefault();
+					var formData = new FormData($( "#importForm" )[0]);  
+					$.ajax({  
+						url: '/biz/f_log/importFrimwareUpdateLog' ,  
+						type: 'POST',  
+						data: formData,  
+						async: false,  
+						cache: false,  
+						contentType: false,  
+						processData: false,  
+						success: function (data) {  
+                            if (data.success) {
+                            	$("#importModal").modal('hide');
+                                $("#importForm")[0].reset();
+                                $('#firmwareLogTableEvents').bootstrapTable('refresh');
+                                parent.layer.msg(data.msg, {icon: 1});
+                            } else {
+                            	$( '#importServerResponse').html(data.msg);  
+                                //parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+						},
+				        error: function (data) {  
+				        	 $('#importServerResponse').html(data.msg); 
+				        } 						
+					});                     
+                });    
+     	    };                          
+            
+            
+
+            //添加
+            //$('#addModal').on('show.bs.modal', function () {
+            //    $("#addForm").data('bootstrapValidator').destroy();
+            //    $('#addForm').data('bootstrapValidator', null);
+            //    addValidator();
+            //});
+            
+            
+            $("#addButton").click(function () {
+                $("#addForm").data('bootstrapValidator').destroy();
+                $('#addForm').data('bootstrapValidator', null);
+                addValidator();
+                $("#addModal").modal("show");            	
+            });
+            addValidator();
+            function addValidator() {
+                $('#addForm').bootstrapValidator({
+                    fields: {
+                    	sn: {
+                            validators: {
+                                notEmpty: {
+                                    message: '设备序列号不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '设备序列号长度最多30个字符'
+                                },
+                            }
+                        },
+                        mac: {
+                            validators: {
+                                notEmpty: {
+                                    message: '设备网卡地址不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '设备网卡地址长度最多30个字符'
+                                },
+                            }
+                        },                     
+                        ver: {
+                            validators: {
+                                notEmpty: {
+                                    message: '设备版本号不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '设备版本号长度最多30个字符'
+                                },
+                            }
+                        }
+                    }
+                }).on('success.form.bv', function(e) {
+                    // Prevent form submission
+                    e.preventDefault();
+					var selectedTypeName = $("#addModal select").find("option:selected").text();
+					$("#addModal #typeName").val(selectedTypeName);                    
+					var formData = new FormData($( "#addForm" )[0]);  
+					$.ajax({  
+						url: '/biz/f_log/addFrimwareUpdateLog' ,  
+						type: 'POST',  
+						data: formData,  
+						async: false,  
+						cache: false,  
+						contentType: false,  
+						processData: false,  
+						success: function (data) {  
+                            if (data.success) {
+                                $("#addModal").modal('hide');
+                                $("#addForm")[0].reset();
+                                $('#firmwareLogTableEvents').bootstrapTable('refresh');
+                                parent.layer.msg(data.msg, {icon: 1});
+                            } else {
+                            	$( '#addServerResponse').html(data.msg);  
+                                //parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+						},
+				        error: function (data) {  
+				             $( '#addServerResponse').html(data.msg);  
+				        } 						
+					});                     
+                });    
+     	    };                 
+
+            //修改
+            $("#updateButton").click(function () {
+                var $result = $('#firmwareLogTableEvents');
+                var list = $result.bootstrapTable('getSelections');
+                if (list.length <= 0 || list.length > 1) {
+                    parent.layer.msg('请选中一条数据', {time: 1500, icon:5});
+                    return;
+                }
+                list = list[0];
+                for (var item in list) {
+                    if (item == 'flag' || item == 'typeName') {
+                        continue;
+                    }
+                    $("#updateModal input[name='"+item+"']").val(list[item]);
+                }
+                $("#updateModal input[name='flag'][value="+list.flag+"]").prop("checked",true);
+                //$("#updateModal select").find("option[text='no_1']").attr("selected",true);
+                $("#updateModal select").val(list.typeId);
+                $("#updateForm").data('bootstrapValidator').destroy();
+                $('#updateForm').data('bootstrapValidator', null);
+                updateValidator();
+                $("#updateModal").modal("show");
+            });
+            updateValidator();
+            function updateValidator() {
+                $('#updateForm').bootstrapValidator({
+                    fields: {
+                        newVer: {
+                            validators: {
+                                notEmpty: {
+                                    message: '版本号标识不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '版本号标识长度最多30个字符'
+                                },
+                            }
+                        },                    
+                        unzipPwd: {
+                            validators: {
+                                notEmpty: {
+                                    message: '解压密码不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '解压密码长度最多30个字符'
+                                },
+                            }
+                        },
+                        verFile: {
+                            validators: {
+                                file: {
+                                    extension: 'gz',
+                                    //type: 'application/x-gtar,application/x-gzip,application/x-compressed,application/zip,application/x-zip,application/x-zip-compressed,application/octet-stream,application/x-compress',
+                                    maxSize: 300 * 1024 * 1024, // 300 MB
+                                    message: '选择的文件无效, 文件必须是tar.gz的压缩包，大小在300MB以内'
+                                }                                
+                            }
+                        }                         
+                    }
+                }).on('success.form.bv', function(e) {
+                    // Prevent form submission
+                    e.preventDefault();
+					var selectedTypeName = $("#updateModal select").find("option:selected").text();
+					$("#updateModal #typeName").val(selectedTypeName);
+					var formData = new FormData($( "#updateForm" )[0]);
+					$.ajax({  
+						url: '/biz/f_log/updateFrimwareUpdateLog' ,  
+						type: 'POST',  
+						data: formData,  
+						async: false,  
+						cache: false,  
+						contentType: false,  
+						processData: false,                                       
+                        success: function(data){
+                            if (data.success) {
+                                $("#updateModal").modal('hide');
+                                $("#updateForm")[0].reset();   
+                                $('#firmwareLogTableEvents').bootstrapTable('refresh');                          
+                                parent.layer.msg(data.msg, {icon: 1});
+                            } else {
+                            	$( '#updateServerResponse').html(data.msg);  
+                                //parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+                        },
+				        error: function (data) {  
+				        	$( '#updateServerResponse').html(data.msg);  
+				        }                         
+                    });
+                });
+            }
+
+            //删除
+            $("#deleteButton").click(function () {
+                var $result = $('#firmwareLogTableEvents');
+                var list = $result.bootstrapTable('getSelections');
+                if (list.length <= 0) {
+                    parent.layer.msg('请至少选中一条数据', {time: 1500, icon:5});
+                    return;
+                }
+                var id = "";
+                for (var item in list) {
+                    id += list[item].id+",";
+                }
+                parent.layer.confirm('确定删除选中的设备？', {
+                    btn: ['确定','取消'], //按钮
+                    shade: false //不显示遮罩
+                }, function(){
+                    $.ajax({
+                        url: "/biz/f_log/delete",
+                        data:  {"id": id},
+                        type: "POST",
+                        dataType: 'json',
+                        success: function(data){
+                            if (data.success) {
+                                $('#firmwareLogTableEvents').bootstrapTable('refresh');
+                                parent.layer.msg(data.msg, {icon: 1});
+                            } else {
+                                parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+                        }
+                    });
+                });
+            });
+            
+            /*$('.search').click(function(){
+                $('#firmwareLogTableEvents').bootstrapTable('refresh');
+            })*/
+            
+            //批量允许更新
+            $("#batchallowButton").click(function () {
+                var $result = $('#firmwareLogTableEvents');
+                var list = $result.bootstrapTable('getSelections');
+                if (list.length <= 0) {
+                    parent.layer.msg('请至少选中一条数据', {time: 1500, icon:5});
+                    return;
+                }
+                var id = "";
+                for (var item in list) {
+                    id += list[item].id+",";
+                }
+                parent.layer.confirm('确定批量允许更新选中的设备？', {
+                    btn: ['确定','取消'], //按钮
+                    shade: false //不显示遮罩
+                }, function(){
+                    $.ajax({
+                        url: "/biz/f_log/batchallow",
+                        data:  {"id": id},
+                        type: "POST",
+                        dataType: 'json',
+                        success: function(data){
+                            if (data.success) {
+                                $('#firmwareLogTableEvents').bootstrapTable('refresh');
+                                parent.layer.msg(data.msg, {icon: 1});
+                            } else {
+                                parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+                        }
+                    });
+                });
+            });
+            
+        });
+        
+        function setFirmwareTypeSelect() {
+            $("#addModal select, #updateModal select").empty();
+            $.get("/biz/f_ver/getTypeList", function(result){
+                var domOption = "";
+                for (var item in result) {
+                    domOption += "<option value='"+result[item].id+"'>"+result[item].typeName+"</option>";
+                }
+                $("#addModal select, #updateModal select").append(domOption);
+            });
+        }
+    </script>
+</body>
+</html>

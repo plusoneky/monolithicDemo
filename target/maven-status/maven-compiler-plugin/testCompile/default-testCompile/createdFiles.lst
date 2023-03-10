@@ -1,0 +1,13 @@
+com\qq183311108\redis\TestRedis.class
+com\qq183311108\sys\mongo\UserApiLogMongoDaoTest.class
+com\qq183311108\mongo\TestMongo.class
+com\qq183311108\shiro\MD5Test.class
+com\qq183311108\AbstractTestController.class
+com\qq183311108\mail\MailTest.class
+com\qq183311108\generator\MpGenerator$3.class
+com\qq183311108\sys\controller\UserControllerTest.class
+com\qq183311108\sys\service\impl\PermissionServiceImplTest.class
+com\qq183311108\generator\MpGenerator$1.class
+com\qq183311108\generator\MpGenerator$2.class
+com\qq183311108\sys\controller\PermissionControllerTest.class
+com\qq183311108\generator\MpGenerator.class

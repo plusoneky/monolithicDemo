@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- 测试 bootstrap-fileinput 上传文件 DEMO源码 -->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+	
+    <!-- Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/locales/zh.js"></script>
+	
+	
+	
+  </head>
+  <body>
+　　<input id="file-1" name="multipartFile" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="0"/>          
+
+	
+<script type="text/javascript">
+function pageAjaxDone(json) {
+	$("#file-1").fileinput({
+		　　uploadUrl: '', // 必须设置个路径进入php代码部分
+		　　allowedFileExtensions : ['jpg', 'png','gif','txt','zip','ico','jpeg','js','css','mp3','mp4','doc','docx'],//允许的文件类型
+		　　overwriteInitial: false,
+		　　maxFileSize: 300000,//文件的最大大小 单位是k
+		　　maxFilesNum: 1,//最多文件数量 
+		　　// allowedFileTypes: ['image', 'video', 'flash'],
+		　　slugCallback: function(filename) {
+		　　　　return filename;
+		　　}
+		});
+}
+
+
+</script>   
+
+  </body>
+</html>

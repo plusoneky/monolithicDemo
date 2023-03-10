@@ -1,0 +1,101 @@
+#Spring Boot Config
+
+#端口
+server:
+  port: 8080
+  tomcat: 
+    remote_ip_header: x-forwarded-for
+    protocol_header: x-forwarded-proto 
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.0.62:3306/firmware_version_db?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+  mail:
+    host: smtp.163.com
+    username: wuhaibing@163.com
+    password: wuhaibing
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+    charset: UTF-8
+  aop:
+    proxy-target-class: true
+  http:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  devtools:
+    restart:
+      enabled: true
+  #REDIS (RedisProperties)
+  redis: 
+    #Redis数据库索引（默认为0）
+    database: 0
+    #Redis服务器地址
+    host: 192.168.1.200
+    #Redis服务器连接端口
+    port: 6379
+    #Redis服务器连接密码（默认为空）
+    password: 123456
+    pool: 
+      #连接池最大连接数（使用负值表示没有限制）
+      max-active: 8
+      #连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      #连接池中的最大空闲连接
+      max-idle: 8
+      #连接池中的最小空闲连接
+      min-idle: 0
+      #连接超时时间（毫秒）
+      timeout: 0
+      #分布式session共享并支持跨域
+  data: 
+    mongodb: 
+      uri: mongodb://test:123456@192.168.0.62:27017/testdb
+ 
+#MyBatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.qq183311108.*.entity
+  #typeEnumsPackage: com.qq183311108.biz.entity.enums
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.baomidou.springboot.xxx
+    #逻辑删除配置
+    #logic-delete-value: 0
+    #logic-not-delete-value: 1
+    #自定义填充策略接口实现
+    meta-object-handler: com.qq183311108.config.mybatis.MyMetaObjectHandler
+    #自定义SQL注入器
+    #sql-injector: com.baomidou.springboot.xxx
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+bizProperties:
+  uploadFileTmpDir: D:/tmp  
+  uploadFileAbsDir: E:/uploaddir
+  updownFileAbsDir: E:/uploaddownloaddir/updown/
+  updownPrefixURL: http://127.0.0.1/updown
+  firstClassDomainName: testcors.com
+  
+sysProperties:  
+  minRequestIntervalTime: 100
+  maxMaliciousTimes: 1
+  
+

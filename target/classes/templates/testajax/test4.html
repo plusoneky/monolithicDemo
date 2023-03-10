@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- 测试使用jquery.form.js插件上传文件，带上传进度条 button的submit方式提交 -->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+    <style>
+        body { padding: 30px }
+        form { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
+        .progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+        .bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+        .percent { position:absolute; display:inline-block; top:3px; left:48%; }
+    </style>
+    <!-- Bootstrap -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet">  --><!-- by lijiabei -->
+    <link href="${request.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
+	<script src="${request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${request.contextPath}/js/jquery.form.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<!-- Standard button -->
+<button type="button" class="btn btn-default">（默认样式）Default</button>
+
+<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+<button type="button" class="btn btn-primary">（首选项）Primary</button>
+
+<!-- Indicates a successful or positive action -->
+<button type="button" class="btn btn-success">（成功）Success</button>
+
+<!-- Contextual button for informational alert messages -->
+<button type="button" class="btn btn-info">（一般信息）Info</button>
+
+<!-- Indicates caution should be taken with this action -->
+<button type="button" class="btn btn-warning">（警告）Warning</button>
+
+<!-- Indicates a dangerous or potentially negative action -->
+<button type="button" class="btn btn-danger">（危险）Danger</button>
+
+<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+<button type="button" class="btn btn-link">（链接）Link</button>  
+    <h1>你好，世界！</h1>
+    <form id= "uploadForm" action= "/biz/f_ver/test_upload" method= "post" enctype="multipart/form-data">  
+         <h1 >测试通过Rest接口上传文件 </h1>   
+         <p>上传文件： <input type ="file" name="multipartFile" value="请选择文件"/></p>
+         <p>关键字1：   <input type ="text" name="test" /></p>    
+         <input type ="submit" value="提交"/>
+         <input type="button" value="ajax" onclick="doUpload()" />  
+    </form>
+	<div class="progress">
+	    <div class="bar"></div >
+	    <div class="percent">0%</div >
+	</div>    
+	<div id="target"></div>
+    <div id="status" name="status"></div>  
+	<script type="text/javascript">  
+	  function doUpload(){  
+		    $(function(){
+		        var bar = $('.bar');
+		        var percent = $('.percent');
+		        var status = $('#status');
+		        //$('form').ajaxForm({
+		        $('#uploadForm').ajaxSubmit({
+		            url: "/biz/f_ver/test_upload",
+		            target: "#target",
+		        	beforeSerialize:function(){
+		                alert("表单数据序列化前执行的操作！");
+		                //$("#txt2").val("java");//如：改变元素的值
+		            },
+		            beforeSubmit:function(){
+		                //alert("表单提交前的操作");
+		                var filesize = $("input[type='file']")[0].files[0].size/1024/1024;
+		                if(filesize > 50){
+		                    alert("文件大小超过限制，最多50M");
+		                    return false;
+		                }
+		                //if($("#txt1").val()==""){return false;}//如：验证表单数据是否为空
+		            },
+		            beforeSend: function() {
+		                status.empty();
+		                var percentVal = '0%';
+		                bar.width(percentVal)
+		                percent.html(percentVal);
+		            },
+		            uploadProgress: function(event, position, total, percentComplete) {//上传的过程
+		                //position 已上传了多少
+		                //total 总大小
+		                //已上传的百分数
+		                var percentVal = percentComplete + '%';
+		                bar.width(percentVal)
+		                percent.html(percentVal);
+		                //console.log(percentVal, position, total);
+		            },
+		            success: function(data) {//成功
+		                var percentVal = '100%';
+		                bar.width(percentVal)
+		                percent.html(percentVal);
+		                alert(data.msg);
+		            },
+		            error:function(err){//失败
+		                alert("表单提交异常！"+err.msg);
+		            },
+		            complete: function(xhr) {//完成
+		                status.html(xhr.responseText);
+		            }
+		        });
+
+		    });
+	  };
+	</script>    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>  --> <!-- by lijiabei -->
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/bootstrap.min.js"></script> --> <!-- by lijiabei -->
+    <script src="${request.contextPath}/js/bootstrap.min.js?v=3.3.6"></script>
+  </body>
+</html>

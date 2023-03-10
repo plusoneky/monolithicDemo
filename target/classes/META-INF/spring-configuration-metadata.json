@@ -1,0 +1,59 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.qq183311108.config.properties.BizProperties",
+      "name": "bizProperties",
+      "type": "com.qq183311108.config.properties.BizProperties"
+    },
+    {
+      "sourceType": "com.qq183311108.config.properties.SysProperties",
+      "name": "sysProperties",
+      "type": "com.qq183311108.config.properties.SysProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.qq183311108.config.properties.BizProperties",
+      "name": "bizProperties.first-class-domain-name",
+      "description": "服务器一级域名",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.qq183311108.config.properties.BizProperties",
+      "name": "bizProperties.updown-file-abs-dir",
+      "description": "上传文件目录，并需要远程下载，如安装包、图片等文件",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.qq183311108.config.properties.BizProperties",
+      "name": "bizProperties.updown-prefix-u-r-l",
+      "description": "下载地址域名前缀部分",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.qq183311108.config.properties.BizProperties",
+      "name": "bizProperties.upload-file-abs-dir",
+      "description": "上传文件目录，不允许远程下载，如Excel文件",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.qq183311108.config.properties.BizProperties",
+      "name": "bizProperties.upload-file-tmp-dir",
+      "description": "上传文件临时目录",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.qq183311108.config.properties.SysProperties",
+      "defaultValue": 0,
+      "name": "sysProperties.max-malicious-times",
+      "type": "java.lang.Long"
+    },
+    {
+      "sourceType": "com.qq183311108.config.properties.SysProperties",
+      "defaultValue": 0,
+      "name": "sysProperties.min-request-interval-time",
+      "type": "java.lang.Long"
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+<#include "/lib/lib.html">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>用户管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="${request.contextPath}/favicon.ico">
+    <link href="${request.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${request.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="${request.contextPath}/css/animate.css" rel="stylesheet">
+    <link href="${request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/plugins/bootstrap-validator/bootstrapValidator.min.css">
+    <link href="${request.contextPath}/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <style>
+        .form-control:focus,
+        .single-line:focus {
+            border-color: #0e9aef !important;
+        }
+        .checkbox-inline {
+            line-height: 5px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+
+        <div class="ibox float-e-margins ibox-blue">
+            <div class="ibox-title">
+                <h5>安全管理</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+
+                    <div class="example" style="margin-top: -10px;">
+                        <div class="btn-group hidden-xs" id="toolbar" role="group">
+                            <button type="button" class="btn btn-outline btn-default" id="updateButton">
+                                <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+                                修改密码
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <@modal "修改用户" "updateModal" "updateForm">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">旧密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="oldPwd" id="oldPwd" placeholder="请输入旧密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">新密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="newPwd" id="newPwd" placeholder="请输入新密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">确认新密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="confirmNewPwd" id="confirmNewPwd" placeholder="请输入确认新密码">
+            </div>
+        </div>
+    </@modal>
+
+    <!-- 全局js -->
+    <script src="${request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${request.contextPath}/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- layer javascript -->
+    <script src="${request.contextPath}/js/plugins/layer/layer.min.js"></script>
+    <!-- 自定义js -->
+    <script src="${request.contextPath}/js/content.js?v=1.0.0"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="${request.contextPath}/js/plugins/bootstrap-validator/bootstrapValidator.js"></script>
+    <script src="${request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+        $("#addUserModal").modal();
+        
+        $(function () {
+            //修改用户
+            $("#updateButton").click(function () {
+                $("#updateForm").data('bootstrapValidator').destroy();
+                $('#updateForm').data('bootstrapValidator', null);
+                updateValidator();
+                $("#updateModal").modal("show");
+            });
+            updateValidator();
+            function updateValidator() {
+                $('#updateForm').bootstrapValidator({
+                    fields: {
+                        oldPwd: {
+                            validators: {
+                                notEmpty: {
+                                    message: '旧密码不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '旧密码长度最多30个字符'
+                                },
+                                /*remote: {
+                                    url: 'remote.php',
+                                    message: 'The username is not available'
+                                },*/
+                            }
+                        },
+                        newPwd: {
+                            validators: {
+                                notEmpty: {
+                                    message: '新密码不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '新密码长度最多30个字符'
+                                },
+                                /*remote: {
+                                    url: 'remote.php',
+                                    message: 'The username is not available'
+                                },*/
+                            }
+                        },
+                        confirmNewPwd: {
+                            validators: {
+                                notEmpty: {
+                                    message: '确认新密码不能为空'
+                                },
+                                stringLength: {
+                                    max: 30,
+                                    message: '确认新密码长度最多30个字符'
+                                },
+                                identical: {
+                                    field: 'newPwd',
+                                    message: '新密码和确认新密码不相同'
+                                }                                
+                                /*remote: {
+                                    url: 'remote.php',
+                                    message: 'The username is not available'
+                                },*/
+                            }
+                        }
+                    }
+                }).on('success.form.bv', function(e) {
+                    // Prevent form submission
+                    e.preventDefault();
+                    $.ajax({
+                        url: "/admin/user/updateUserPwd?",
+                        data: "oldPwd="+$("#oldPwd").val()+"&newPwd="+$("#newPwd").val(),
+                        type: "POST",
+                        dataType: 'json',
+                        success: function(data){
+                            $("#updateModal").modal('hide');
+                            if (data.success) {
+                                $("#updateModal").modal('hide');
+                                parent.layer.msg(data.msg, {icon: 1});
+                                //window.location.href = "/admin/logout";
+                            } else {
+                                parent.layer.msg(data.msg, {time: 1500, icon:5});
+                            }
+                        }
+                    });
+                });
+            }
+            /*$('.search').click(function(){
+                $('#userTableEvents').bootstrapTable('refresh');
+            })*/
+        });
+    </script>
+</body>
+</html>

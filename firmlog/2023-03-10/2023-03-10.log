@@ -1,0 +1,50 @@
+2023-03-10 13:56:07 -Starting MailTest on SD-20211207KKKV with PID 13976 (started by Administrator in D:\work\code\java\pinetree\monolithicDemo)
+2023-03-10 13:56:07 -Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2023-03-10 13:56:07 -The following profiles are active: dev
+2023-03-10 13:56:07 -Refreshing org.springframework.web.context.support.GenericWebApplicationContext@628c4ac0: startup date [Fri Mar 10 13:56:07 CST 2023]; root of context hierarchy
+2023-03-10 13:56:07 -HV000001: Hibernate Validator 5.3.6.Final
+2023-03-10 13:56:08 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-03-10 13:56:08 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-03-10 13:56:08 -No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2023-03-10 13:56:09 -No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2023-03-10 13:56:09 -JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2023-03-10 13:56:09 -Bean 'redisConfig' of type [com.qq183311108.config.redis.RedisConfig$$EnhancerBySpringCGLIB$$99d1e1f5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'bizProperties' of type [com.qq183311108.config.properties.BizProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'shiroRedisCacheConfiguration' of type [com.qq183311108.config.shiro.ShiroRedisCacheConfiguration$$EnhancerBySpringCGLIB$$5054eac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'credentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'mybatis-plus-com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusProperties' of type [com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'mybatisPlusConfig' of type [com.qq183311108.config.mybatis.MybatisPlusConfig$$EnhancerBySpringCGLIB$$613567df] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'performanceInterceptor' of type [com.baomidou.mybatisplus.plugins.PerformanceInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'paginationInterceptor' of type [com.baomidou.mybatisplus.plugins.PaginationInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusAutoConfiguration' of type [com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$d9926c6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Generic' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Generic] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:09 -Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -{dataSource-1} inited
+2023-03-10 13:56:10 -Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'sqlSessionTemplate' of type [org.mybatis.spring.SqlSessionTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'userMapper' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'userMapper' of type [com.sun.proxy.$Proxy110] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'userRoleMapper' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'userRoleMapper' of type [com.sun.proxy.$Proxy111] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'userServiceImpl' of type [com.qq183311108.sys.service.impl.UserServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'permissionMapper' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'permissionMapper' of type [com.sun.proxy.$Proxy112] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'myShiroRealm' of type [com.qq183311108.config.shiro.MyShiroRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:10 -Bean 'redisManager' of type [org.crazycake.shiro.RedisManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'sessionIdGenerator' of type [com.qq183311108.config.shiro.MySessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'redisSessionDAO' of type [org.crazycake.shiro.RedisSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'sessionIdCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'redisCacheManager' of type [org.crazycake.shiro.RedisCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -ShiroConfiguration.shirFilter()
+2023-03-10 13:56:11 -Bean 'myKickoutSessionControlFilter' of type [com.qq183311108.config.shiro.MyKickoutSessionControlFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'keyGenerator' of type [com.qq183311108.config.redis.RedisConfig$1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bff98869] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'authorizationAttributeSourceAdvisor' of type [org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$90bbe87] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'org.springframework.statemachine.config.configuration.StateMachineAnnotationPostProcessorConfiguration' of type [org.springframework.statemachine.config.configuration.StateMachineAnnotationPostProcessorConfiguration$$EnhancerBySpringCGLIB$$1b8d9e6a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'integrationGlobalProperties' of type [org.springframework.beans.factory.config.PropertiesFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -Bean 'integrationGlobalProperties' of type [java.util.Properties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-10 13:56:11 -ClassTemplateLoader for Spring macros added to FreeMarker configuration

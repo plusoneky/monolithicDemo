@@ -1,0 +1,74 @@
+<!doctype html>
+<!-- 测试ajax json 请求 ，不要启动nginx
+hosts配置 测试跨域
+127.0.0.1     us.testcors.com
+127.0.0.1     static.testcors.com
+
+下面两个应该都通过，才支持跨域
+http://us.testcors.com:8080/test1
+http://static.testcors.com:8080/test1
+
+http://us.testcors.com:8080/testcors/testcors.html
+http://static.testcors.com:8080/testcors/testcors.html
+-->
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+ 	<input type="button" value="test login" onclick="javascript:test1();">
+	<script type="text/javascript">  
+	  //curl -l -H "Content-type: application/json" -X POST -d '{"pageSize":100,"currentPage":1,"sex":1}' http://127.0.0.1/admin/user/getList?pageNumber=1&pageSize=5&callback=jQuery214008033468439434732_1513589515421
+	  function test1(){  
+	      //var data1={"username":"admin","password":"admin123"};      //服务端需要放在请求参数中接收，这里实际不起作用
+          jQuery.support.cors=true;
+	      $.ajax({ 
+	          type:"POST", 
+	          url:"http://us.testcors.com:8080/admin/myloginAjax?username=admin&password=admin123", //测试跨域
+	          dataType:"json",
+	          crossDomain: true, //发送Ajax时，Request header 中会包含跨域的额外信息，但不会含cookie
+	          xhrFields: {withCredentials: true}, //发送Ajax时，Request header中便会带上 Cookie 信息
+	          contentType:"application/json",               
+	          //data:JSON.stringify(data1), 
+	          success:function(resultData){ 
+	              alert("success result="+JSON.stringify(resultData));     
+	          },
+		      error:function(resultData) {  
+		    	  alert("error result="+JSON.stringify(resultData));    
+		      } 
+	       }); 
+	  };  
+	</script> 	
+
+ 	<input type="button" value="test getList" onclick="javascript:test2();">
+	<script type="text/javascript">  
+	  //curl -l -H "Content-type: application/json" -X POST -d '{"pageSize":100,"currentPage":1,"sex":1}' http://127.0.0.1/admin/user/getList?pageNumber=1&pageSize=5&callback=jQuery214008033468439434732_1513589515421
+	  function test2(){  
+	      //var data1={"pageSize":5,"pageNumber":1};      //服务端需要放在请求参数中接收，这里实际不起作用
+          jQuery.support.cors=true;
+	      $.ajax({ 
+	          type:"POST", 
+	          //url:"/admin/user/getList?pageNumber=1&pageSize=2", //&callback=JQuery234234234234
+	          url:"http://us.testcors.com:8080/admin/user/getList?pageNumber=1&pageSize=2", //测试跨域
+	          dataType:"json",
+	          crossDomain: true, //发送Ajax时，Request header 中会包含跨域的额外信息，但不会含cookie
+	          xhrFields: {withCredentials: true}, //发送Ajax时，Request header中便会带上 Cookie 信息
+	          contentType:"application/json",               
+	          //data:JSON.stringify(data1), 
+	          success:function(resultData){ 
+	              alert("success result="+JSON.stringify(resultData));     
+	          },
+		      error:function(resultData) {  
+		    	  alert("error result="+JSON.stringify(resultData));    
+		      } 
+	       }); 
+	  };  
+	</script>
+	<script src="../js/jquery.min.js?v=2.1.4"></script> 	
+ </body>
+</html>
