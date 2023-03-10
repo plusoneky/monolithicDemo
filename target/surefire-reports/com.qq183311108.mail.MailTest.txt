@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Test set: com.qq183311108.mail.MailTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 22.163 sec <<< FAILURE! - in com.qq183311108.mail.MailTest
+testMail(com.qq183311108.mail.MailTest)  Time elapsed: 9.9 sec  <<< ERROR!
+org.springframework.mail.MailAuthenticationException: Authentication failed; nested exception is javax.mail.AuthenticationFailedException: 550 User is locked
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:932)
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:843)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:748)
+	at javax.mail.Service.connect(Service.java:366)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:501)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.doSend(JavaMailSenderImpl.java:421)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.send(JavaMailSenderImpl.java:307)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.send(JavaMailSenderImpl.java:296)
+	at com.qq183311108.mail.MailTest.testMail(MailTest.java:35)
+

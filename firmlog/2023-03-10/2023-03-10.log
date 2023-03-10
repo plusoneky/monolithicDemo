@@ -48,3 +48,139 @@
 2023-03-10 13:56:11 -Bean 'integrationGlobalProperties' of type [org.springframework.beans.factory.config.PropertiesFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
 2023-03-10 13:56:11 -Bean 'integrationGlobalProperties' of type [java.util.Properties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
 2023-03-10 13:56:11 -ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2023-03-10 13:56:15 -Cluster created with settings {hosts=[192.168.0.62:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2023-03-10 13:56:15 -Opened connection [connectionId{localValue:1}] to 192.168.0.62:27017
+2023-03-10 13:56:15 -Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.62:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[6, 0, 4]}, minWireVersion=0, maxWireVersion=17, maxDocumentSize=16777216, roundTripTimeNanos=1413600}
+2023-03-10 13:56:16 -Mapped "{[/biz/f_ver/delete],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FirmwareVersionController.delete(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_ver/versionlist],methods=[GET]}" onto public java.lang.String com.qq183311108.biz.controller.FirmwareVersionController.list()
+2023-03-10 13:56:16 -Mapped "{[/biz/f_ver/getTypeList],methods=[GET]}" onto public java.util.List<com.qq183311108.biz.entity.FirmwareVersion> com.qq183311108.biz.controller.FirmwareVersionController.getTypeList(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_ver/getList],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.qq183311108.biz.controller.FirmwareVersionController.getVersionList(int,int,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_ver/test_upload],consumes=[multipart/form-data],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FirmwareVersionController.testUpload(java.lang.String,org.springframework.web.multipart.MultipartFile)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_ver/addFirmwareVersion],methods=[POST],consumes=[multipart/form-data],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FirmwareVersionController.addFirmwareVersion(java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_ver/updateFirmwareVersion],methods=[POST],consumes=[multipart/form-data],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FirmwareVersionController.updateFirmwareVersion(java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_log/delete],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FrimwareUpdateLogController.delete(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_log/loglist],methods=[GET]}" onto public java.lang.String com.qq183311108.biz.controller.FrimwareUpdateLogController.list()
+2023-03-10 13:56:16 -Mapped "{[/biz/f_log/getList],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.qq183311108.biz.controller.FrimwareUpdateLogController.getList(int,int,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_log/batchallow],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FrimwareUpdateLogController.batchallow(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_log/importFrimwareUpdateLog],methods=[POST],consumes=[multipart/form-data],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FrimwareUpdateLogController.importFrimwareUpdateLog(org.springframework.web.multipart.MultipartFile)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_log/updateFrimwareUpdateLog],methods=[POST],consumes=[multipart/form-data],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FrimwareUpdateLogController.updateFrimwareUpdateLog(java.lang.String,java.lang.String,java.lang.String,java.lang.Long,java.lang.String,java.lang.String,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/biz/f_log/addFrimwareUpdateLog],methods=[POST],consumes=[multipart/form-data],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.biz.controller.FrimwareUpdateLogController.addFrimwareUpdateLog(java.lang.String,java.lang.String,java.lang.Long,java.lang.String,java.lang.String,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/tp/save_update_log],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.dto.ApiResDto com.qq183311108.frimware.controller.FrimwareProtocolController.succDone(com.qq183311108.common.dto.FirmwareUpdateLogDto,javax.servlet.http.HttpServletRequest)
+2023-03-10 13:56:16 -Mapped "{[/tp/get_new_ver],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public com.qq183311108.common.dto.ApiResDto com.qq183311108.frimware.controller.FrimwareProtocolController.getNewVer(com.qq183311108.common.dto.GetNewVerDto,javax.servlet.http.HttpServletRequest)
+2023-03-10 13:56:16 -Mapped "{[/admin/index]}" onto public java.lang.String com.qq183311108.sys.controller.IndexController.index(org.springframework.ui.Model)
+2023-03-10 13:56:16 -Mapped "{[/admin/register],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.IndexController.register(com.qq183311108.sys.entity.User,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/sencCode],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.IndexController.sendCode(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/register],methods=[GET]}" onto public java.lang.String com.qq183311108.sys.controller.IndexController.registerView()
+2023-03-10 13:56:16 -Mapped "{[/admin/index_1]}" onto public java.lang.String com.qq183311108.sys.controller.IndexController.index_1()
+2023-03-10 13:56:16 -Mapped "{[/admin/myloginAjax],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.IndexController.myloginAjax(java.lang.String,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/login],methods=[GET]}" onto public java.lang.String com.qq183311108.sys.controller.IndexController.loginForm()
+2023-03-10 13:56:16 -Mapped "{[/admin/isUsername]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.qq183311108.sys.controller.IndexController.isUsername(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/mylogin]}" onto public java.lang.String com.qq183311108.sys.controller.IndexController.mylogin(java.lang.String,java.lang.String,java.util.Map<java.lang.String, java.lang.Object>)
+2023-03-10 13:56:16 -Mapped "{[/admin/isEmail]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.qq183311108.sys.controller.IndexController.isEmail(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/list],methods=[GET]}" onto public java.lang.String com.qq183311108.sys.controller.PermissionController.list()
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/modifyRolePermission]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.PermissionController.modifyRolePermission(java.util.List<com.qq183311108.sys.entity.RolePermission>)
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/deletePermissionRole]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.PermissionController.deletePermissionRole(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/updatePermission]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.PermissionController.updatePermission(com.qq183311108.sys.entity.Permission)
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/addPermission]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.PermissionController.addPermission(com.qq183311108.sys.entity.Permission)
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/getPermissionZTreeNodes]}" onto public java.util.List<com.qq183311108.sys.entity.ZNodes> com.qq183311108.sys.controller.PermissionController.getPermissionZTreeNodes(java.lang.Long)
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/getList],methods=[GET]}" onto public java.util.List<com.qq183311108.sys.entity.Permission> com.qq183311108.sys.controller.PermissionController.getPermissionList()
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/getTypePermission/{type}]}" onto public java.util.List<com.qq183311108.sys.entity.Permission> com.qq183311108.sys.controller.PermissionController.getTypePermission(java.lang.Integer)
+2023-03-10 13:56:16 -Mapped "{[/admin/permission/getPermissionById]}" onto public com.qq183311108.sys.entity.Permission com.qq183311108.sys.controller.PermissionController.getPermissionById(java.lang.Long)
+2023-03-10 13:56:16 -Mapped "{[/admin/role/delete]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.RoleController.delete(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/role/list],methods=[GET]}" onto public java.lang.String com.qq183311108.sys.controller.RoleController.list()
+2023-03-10 13:56:16 -Mapped "{[/admin/role/addRole],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.RoleController.addRole(com.qq183311108.sys.entity.Role)
+2023-03-10 13:56:16 -Mapped "{[/admin/role/modifyUserRole]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.RoleController.modifyUserRole(java.util.List<com.qq183311108.sys.entity.UserRole>)
+2023-03-10 13:56:16 -Mapped "{[/admin/role/getUserRole]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.RoleController.getUserRole(com.qq183311108.sys.entity.User)
+2023-03-10 13:56:16 -Mapped "{[/admin/role/updateRole],methods=[POST]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.RoleController.updateRole(com.qq183311108.sys.entity.Role)
+2023-03-10 13:56:16 -Mapped "{[/admin/role/getList],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.qq183311108.sys.controller.RoleController.getUserList(int,int,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/test1]}" onto public java.lang.String com.qq183311108.sys.controller.TestController.index(org.springframework.ui.Model)
+2023-03-10 13:56:16 -Mapped "{[/admin/user/delete]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.UserController.delete(java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/user/list],methods=[GET]}" onto public java.lang.String com.qq183311108.sys.controller.UserController.list(org.springframework.ui.Model)
+2023-03-10 13:56:16 -Mapped "{[/admin/user/me],methods=[GET]}" onto public com.qq183311108.sys.entity.User com.qq183311108.sys.controller.UserController.me()
+2023-03-10 13:56:16 -Mapped "{[/admin/user/addUser]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.UserController.addUser(com.qq183311108.sys.entity.User)
+2023-03-10 13:56:16 -Mapped "{[/admin/user/optionUserStatus]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.UserController.optionUserStatus(java.util.List<com.qq183311108.sys.entity.User>)
+2023-03-10 13:56:16 -Mapped "{[/admin/user/updateUser]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.UserController.updateUser(com.qq183311108.sys.entity.User)
+2023-03-10 13:56:16 -Mapped "{[/admin/user/updateUserPwd]}" onto public com.qq183311108.common.result.JsonResult com.qq183311108.sys.controller.UserController.updateUserPwd(java.lang.String,java.lang.String)
+2023-03-10 13:56:16 -Mapped "{[/admin/user/getList]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.qq183311108.sys.controller.UserController.getUserList(int,int,java.lang.String,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2023-03-10 13:56:16 -Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2023-03-10 13:56:16 -Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2023-03-10 13:56:16 -Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2023-03-10 13:56:16 -Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2023-03-10 13:56:16 -Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2023-03-10 13:56:16 -Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2023-03-10 13:56:16 -Initializing ExecutorService  'clientInboundChannelExecutor'
+2023-03-10 13:56:16 -Initializing ExecutorService  'clientOutboundChannelExecutor'
+2023-03-10 13:56:16 -Initializing ExecutorService  'messageBrokerTaskScheduler'
+2023-03-10 13:56:16 -Mapped URL path [/webSocketServer/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler]
+2023-03-10 13:56:16 -Initializing ExecutorService  'brokerChannelExecutor'
+2023-03-10 13:56:17 -Mapped "{[/subscribeTest],messageType=[SUBSCRIBE]}" onto public com.qq183311108.config.websocket.ServerMessage com.qq183311108.config.websocket.WebSocketAction.sub()
+2023-03-10 13:56:17 -Mapped "{[/sendTest],messageType=[MESSAGE]}" onto public com.qq183311108.config.websocket.ServerMessage com.qq183311108.config.websocket.WebSocketAction.sendDemo(com.qq183311108.config.websocket.ClientMessage)
+2023-03-10 13:56:17 -Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@628c4ac0: startup date [Fri Mar 10 13:56:07 CST 2023]; root of context hierarchy
+2023-03-10 13:56:17 -Detected ResponseBodyAdvice bean in jsonpAdvice
+2023-03-10 13:56:17 -Mapped URL path [/test1] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/test2] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/test3] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/test4] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/test5] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/test6] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/test7] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/test8] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2023-03-10 13:56:17 -Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2023-03-10 13:56:17 -Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2023-03-10 13:56:17 -Detected ResponseBodyAdvice implementation in jsonpAdvice
+2023-03-10 13:56:17 -Detected @ExceptionHandler methods in globalExceptionHandler
+2023-03-10 13:56:17 -Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2023-03-10 13:56:18 -Starting beans in phase 0
+2023-03-10 13:56:18 -Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2023-03-10 13:56:18 -Channel 'application:dev:-1.errorChannel' has 1 subscriber(s).
+2023-03-10 13:56:18 -started _org.springframework.integration.errorLogger
+2023-03-10 13:56:18 -Starting beans in phase 2147483647
+2023-03-10 13:56:18 -Context refreshed
+2023-03-10 13:56:18 -Found 1 custom documentation plugin(s)
+2023-03-10 13:56:18 -Scanning for api listing references
+2023-03-10 13:56:18 -Generating unique operation named: testUploadUsingPOST_1
+2023-03-10 13:56:18 -Generating unique operation named: testUploadUsingPOST_2
+2023-03-10 13:56:18 -Generating unique operation named: testUploadUsingPOST_3
+2023-03-10 13:56:18 -Generating unique operation named: testUploadUsingPOST_4
+2023-03-10 13:56:18 -Generating unique operation named: testUploadUsingPOST_5
+2023-03-10 13:56:18 -Generating unique operation named: testUploadUsingPOST_6
+2023-03-10 13:56:18 -Generating unique operation named: testUploadUsingPOST_7
+2023-03-10 13:56:18 -Generating unique operation named: deleteUsingPOST_1
+2023-03-10 13:56:18 -Generating unique operation named: listUsingGET_1
+2023-03-10 13:56:18 -Starting...
+2023-03-10 13:56:18 -BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2023-03-10 13:56:18 -Started.
+2023-03-10 13:56:18 ->>>>>>>>>>>>>>>服务启动执行，执行加载数据等操作<<<<<<<<<<<<<
+2023-03-10 13:56:18 -s0 ttttttttttttttttttttttttttt---message:null
+2023-03-10 13:56:18 -stateChanged:no from id State change to STATES_0
+2023-03-10 13:56:18 -started org.springframework.statemachine.support.DefaultStateMachineExecutor@c79780
+2023-03-10 13:56:18 -started STATES_1 STATES_4 STATES_0 STATES_3 STATES_2  / STATES_0 / uuid=0db484c8-4ad1-4cb4-bb25-24809403e15b / id=InvestOrderStateMachineId
+2023-03-10 13:56:18 -stopped org.springframework.statemachine.support.DefaultStateMachineExecutor@c79780
+2023-03-10 13:56:18 -stopped STATES_1 STATES_4 STATES_0 STATES_3 STATES_2  /  / uuid=0db484c8-4ad1-4cb4-bb25-24809403e15b / id=InvestOrderStateMachineId
+2023-03-10 13:56:18 -started ObjectState [getIds()=[STATES_0], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=309276344, toString()=AbstractState [id=STATES_0, pseudoState=org.springframework.statemachine.state.DefaultPseudoState@67823972, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+2023-03-10 13:56:18 -started org.springframework.statemachine.support.DefaultStateMachineExecutor@c79780
+2023-03-10 13:56:18 -started STATES_1 STATES_4 STATES_0 STATES_3 STATES_2  / STATES_0 / uuid=0db484c8-4ad1-4cb4-bb25-24809403e15b / id=InvestOrderStateMachineId
+2023-03-10 13:56:18 ->>>>>>>>>>>>>>>>>>>>start 当前状态：ObjectState [getIds()=[STATES_0], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=309276344, toString()=AbstractState [id=STATES_0, pseudoState=org.springframework.statemachine.state.DefaultPseudoState@67823972, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+2023-03-10 13:56:18 -s1 ddddddddddddddddddddddddddd---header:{orderJsonStr={"orderId":1234,"orderStatus":"STATES_0","orderName":"testOrder"}, id=41857d1d-c0e8-6e11-b84b-9b39346bffa9, timestamp=1678427778914},---payload:E1
+2023-03-10 13:56:18 -stateChanged:STATES_0 State change to STATES_1
+2023-03-10 13:56:18 ->>>>>>>>>>>>>>>>>>>>E1 当前状态：ObjectState [getIds()=[STATES_1], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=2101604809, toString()=AbstractState [id=STATES_1, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+2023-03-10 13:56:18 -s2 cccccccccccccccccccccccccccc---header:{orderJsonStr={"orderId":1234,"orderStatus":"STATES_0","orderName":"testOrder"}, id=dcee7072-0ee7-c691-85f5-468504623261, timestamp=1678427778960},---payload:E2
+2023-03-10 13:56:18 -stateChanged:STATES_1 State change to STATES_2
+2023-03-10 13:56:18 ->>>>>>>>>>>>>>>>>>>>E2 当前状态：ObjectState [getIds()=[STATES_2], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=18758920, toString()=AbstractState [id=STATES_2, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+2023-03-10 13:56:18 -s3 hhhhhhhhhhhhhhhhhhhhhhhhhhhh---header:{id=e903580e-cdc3-1d83-8e47-51ad4d697013, timestamp=1678427778960},---payload:E3
+2023-03-10 13:56:18 -stateChanged:STATES_2 State change to STATES_3
+2023-03-10 13:56:18 ->>>>>>>>>>>>>>>>>>>>E3 当前状态：ObjectState [getIds()=[STATES_3], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=633686225, toString()=AbstractState [id=STATES_3, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+2023-03-10 13:56:18 -s4 ggggggggggggggggggggggggggggg---header:{id=92f7890a-e513-9849-90e8-f9a6b39057e6, timestamp=1678427778961},---payload:E4
+2023-03-10 13:56:18 -stateChanged:STATES_3 State change to STATES_4
+2023-03-10 13:56:18 ->>>>>>>>>>>>>>>>>>>>E4 当前状态：ObjectState [getIds()=[STATES_4], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=1198139417, toString()=AbstractState [id=STATES_4, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+2023-03-10 13:56:18 -Started MailTest in 12.112 seconds (JVM running for 12.954)
+2023-03-10 13:56:28 -Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.qq183311108.sys.controller.PermissionControllerTest], using SpringBootContextLoader
+2023-03-10 13:56:28 -Could not detect default resource locations for test class [com.qq183311108.sys.controller.PermissionControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-03-10 13:56:28 -Could not detect default configuration classes for test class [com.qq183311108.sys.controller.PermissionControllerTest]: PermissionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-03-10 13:56:28 -Found @SpringBootConfiguration com.qq183311108.FirmwareServerApplication for test class com.qq183311108.sys.controller.PermissionControllerTest
+2023-03-10 13:56:28 -Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2023-03-10 13:56:28 -Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@39109603, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4d3990a5, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@18df26a1, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5c459194, org.springframework.test.context.transaction.TransactionalTestExecutionListener@61d8a491, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6065bcb7, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1ee6434, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@71d78cac, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@550f522b, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1842dc39, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@6a7fc4c1, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@270097ce]
+2023-03-10 13:56:28 -Initializing Spring FrameworkServlet ''
+2023-03-10 13:56:28 -FrameworkServlet '': initialization started
+2023-03-10 13:56:28 -FrameworkServlet '': initialization completed in 10 ms
+2023-03-10 13:56:28 -Enabling session validation scheduler...
