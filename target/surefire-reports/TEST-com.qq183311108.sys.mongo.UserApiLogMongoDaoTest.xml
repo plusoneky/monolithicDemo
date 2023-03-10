@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.qq183311108.sys.mongo.UserApiLogMongoDaoTest" time="0.107" tests="1" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="idea.version" value="2021.3.1"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\myprogram\Java\jdk-8-351\jre\bin"/>
+    <property name="java.vm.version" value="25.351-b10"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\work\code\java\pinetree\monolithicDemo"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\work\code\java\pinetree\monolithicDemo"/>
+    <property name="java.runtime.version" value="1.8.0_351-b10"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\myprogram\Java\jdk-8-351\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\ADMINI~1\AppData\Local\Temp\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\plugins\maven\lib\maven3\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\myprogram\Java\jdk-8-351\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Python311\Scripts\;C:\Python311\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\myprogram\Java\jdk-8-351\bin;C:\myprogram\go\\bin;C:\Program Files\TortoiseSVN\bin;C:\myprogram\apache-maven-3.8.4\bin;C:\myprogram\mongodb-database-tools-windows-x86_64-100.5.1\bin;C:\Program Files (x86)\Git\cmd;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\NetSarang\Xshell 7\;C:\myprogram\Redis-x64-5.0.14.1;C:\myprogram\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\Administrator\.cargo\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Roaming\npm;."/>
+    <property name="maven.conf" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\plugins\maven\lib\maven3/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\Administrator"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="Administrator"/>
+    <property name="java.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\plugins\maven\lib\maven3\boot\plexus-classworlds.license;C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\lib\idea_rt.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\myprogram\Java\jdk-8-351\jre"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2021.3.1 package"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_351"/>
+    <property name="java.ext.dirs" value="C:\myprogram\Java\jdk-8-351\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\myprogram\Java\jdk-8-351\jre\lib\resources.jar;C:\myprogram\Java\jdk-8-351\jre\lib\rt.jar;C:\myprogram\Java\jdk-8-351\jre\lib\jsse.jar;C:\myprogram\Java\jdk-8-351\jre\lib\jce.jar;C:\myprogram\Java\jdk-8-351\jre\lib\charsets.jar;C:\myprogram\Java\jdk-8-351\jre\lib\jfr.jar;C:\myprogram\Java\jdk-8-351\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.maintenance.version" value="4"/>
+    <property name="maven.home" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\plugins\maven\lib\maven3"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase name="testfindByCreatimeAndMobileAndStatus" classname="com.qq183311108.sys.mongo.UserApiLogMongoDaoTest" time="0.107">
+    <error message="Query failed with error code 352 and error message &apos;Unsupported OP_QUERY command: find. The client driver may require an upgrade. For more details see https://dochub.mongodb.org/core/legacy-opcode-removal&apos; on server 192.168.0.62:27017; nested exception is com.mongodb.MongoQueryException: Query failed with error code 352 and error message &apos;Unsupported OP_QUERY command: find. The client driver may require an upgrade. For more details see https://dochub.mongodb.org/core/legacy-opcode-removal&apos; on server 192.168.0.62:27017" type="org.springframework.data.mongodb.UncategorizedMongoDbException">org.springframework.data.mongodb.UncategorizedMongoDbException: Query failed with error code 352 and error message 'Unsupported OP_QUERY command: find. The client driver may require an upgrade. For more details see https://dochub.mongodb.org/core/legacy-opcode-removal' on server 192.168.0.62:27017; nested exception is com.mongodb.MongoQueryException: Query failed with error code 352 and error message 'Unsupported OP_QUERY command: find. The client driver may require an upgrade. For more details see https://dochub.mongodb.org/core/legacy-opcode-removal' on server 192.168.0.62:27017
+	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:521)
+	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:510)
+	at com.mongodb.operation.OperationHelper.withConnectionSource(OperationHelper.java:435)
+	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:408)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:510)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:81)
+	at com.mongodb.Mongo.execute(Mongo.java:836)
+	at com.mongodb.Mongo$2.execute(Mongo.java:823)
+	at com.mongodb.DBCursor.initializeCursor(DBCursor.java:870)
+	at com.mongodb.DBCursor.hasNext(DBCursor.java:142)
+	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:1967)
+	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1787)
+	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1770)
+	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:644)
+	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:635)
+	at com.qq183311108.sys.mongo.UserApiLogMongoDao.selectNoPageFromMongo(UserApiLogMongoDao.java:93)
+	at com.qq183311108.sys.mongo.UserApiLogMongoDaoTest.testfindByCreatimeAndMobileAndStatus(UserApiLogMongoDaoTest.java:80)
+</error>
+    <system-out><![CDATA[
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.5.9.RELEASE)
+
+14:02:05 [main] INFO  c.q.sys.mongo.UserApiLogMongoDaoTest - Starting UserApiLogMongoDaoTest on SD-20211207KKKV with PID 13976 (started by Administrator in D:\work\code\java\pinetree\monolithicDemo)
+14:02:05 [main] DEBUG c.q.sys.mongo.UserApiLogMongoDaoTest - Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+14:02:05 [main] INFO  c.q.sys.mongo.UserApiLogMongoDaoTest - The following profiles are active: dev
+14:02:06 [main] INFO  c.q.c.s.ShiroRedisCacheConfiguration - ShiroConfiguration.shirFilter()
+14:02:07 [main] INFO  c.q.state.DemoCommandLineRunner - >>>>>>>>>>>>>>>服务启动执行，执行加载数据等操作<<<<<<<<<<<<<
+14:02:07 [main] INFO  c.q.s.StateMachineEventConfig$$EnhancerBySpringCGLIB$$c12db5ae - s0 ttttttttttttttttttttttttttt---message:null
+14:02:07 [main] INFO  c.q.state.StateMachineConfig - stateChanged:no from id State change to STATES_0
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+14:02:07 [main] INFO  c.q.state.DemoCommandLineRunner - >>>>>>>>>>>>>>>>>>>>start 当前状态：ObjectState [getIds()=[STATES_0], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=726037979, toString()=AbstractState [id=STATES_0, pseudoState=org.springframework.statemachine.state.DefaultPseudoState@1737834, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+14:02:07 [main] INFO  c.q.s.StateMachineEventConfig$$EnhancerBySpringCGLIB$$c12db5ae - s1 ddddddddddddddddddddddddddd---header:{orderJsonStr={"orderId":1234,"orderStatus":"STATES_0","orderName":"testOrder"}, id=034aca60-3696-f0e0-4a0a-d657de6822d7, timestamp=1678428127865},---payload:E1
+14:02:07 [main] INFO  c.q.state.StateMachineConfig - stateChanged:STATES_0 State change to STATES_1
+14:02:07 [main] INFO  c.q.state.DemoCommandLineRunner - >>>>>>>>>>>>>>>>>>>>E1 当前状态：ObjectState [getIds()=[STATES_1], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=984522383, toString()=AbstractState [id=STATES_1, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+14:02:07 [main] INFO  c.q.s.StateMachineEventConfig$$EnhancerBySpringCGLIB$$c12db5ae - s2 cccccccccccccccccccccccccccc---header:{orderJsonStr={"orderId":1234,"orderStatus":"STATES_0","orderName":"testOrder"}, id=f2d55983-4bf7-3eac-d4d5-fb9cf66c4963, timestamp=1678428127867},---payload:E2
+14:02:07 [main] INFO  c.q.state.StateMachineConfig - stateChanged:STATES_1 State change to STATES_2
+14:02:07 [main] INFO  c.q.state.DemoCommandLineRunner - >>>>>>>>>>>>>>>>>>>>E2 当前状态：ObjectState [getIds()=[STATES_2], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=430414283, toString()=AbstractState [id=STATES_2, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+14:02:07 [main] INFO  c.q.s.StateMachineEventConfig$$EnhancerBySpringCGLIB$$c12db5ae - s3 hhhhhhhhhhhhhhhhhhhhhhhhhhhh---header:{id=a29ea89c-a362-68b6-33f1-034fdaa6f782, timestamp=1678428127869},---payload:E3
+14:02:07 [main] INFO  c.q.state.StateMachineConfig - stateChanged:STATES_2 State change to STATES_3
+14:02:07 [main] INFO  c.q.state.DemoCommandLineRunner - >>>>>>>>>>>>>>>>>>>>E3 当前状态：ObjectState [getIds()=[STATES_3], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=1297151618, toString()=AbstractState [id=STATES_3, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+14:02:07 [main] INFO  c.q.s.StateMachineEventConfig$$EnhancerBySpringCGLIB$$c12db5ae - s4 ggggggggggggggggggggggggggggg---header:{id=c5dacec8-0c1e-4c2a-ebc5-7b0156c546a0, timestamp=1678428127870},---payload:E4
+14:02:07 [main] INFO  c.q.state.StateMachineConfig - stateChanged:STATES_3 State change to STATES_4
+14:02:07 [main] INFO  c.q.state.DemoCommandLineRunner - >>>>>>>>>>>>>>>>>>>>E4 当前状态：ObjectState [getIds()=[STATES_4], getClass()=class org.springframework.statemachine.state.ObjectState, hashCode()=54809409, toString()=AbstractState [id=STATES_4, pseudoState=null, deferred=[], entryActions=[], exitActions=[], stateActions=[], regions=[], submachine=null]]
+14:02:07 [main] INFO  c.q.sys.mongo.UserApiLogMongoDaoTest - Started UserApiLogMongoDaoTest in 2.505 seconds (JVM running for 361.863)
+beginTime=1497630580000
+endTime  =1513441780000
+]]></system-out>
+  </testcase>
+</testsuite>

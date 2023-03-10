@@ -1,0 +1,48 @@
+-------------------------------------------------------------------------------
+Test set: com.qq183311108.sys.controller.PermissionControllerTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 41.828 sec <<< FAILURE! - in com.qq183311108.sys.controller.PermissionControllerTest
+testList(com.qq183311108.sys.controller.PermissionControllerTest)  Time elapsed: 20.806 sec  <<< ERROR!
+javax.servlet.ServletException: java.lang.IllegalArgumentException: Header value must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:134)
+	at org.springframework.mock.web.MockHttpServletResponse.doAddHeaderValue(MockHttpServletResponse.java:577)
+	at org.springframework.mock.web.MockHttpServletResponse.setHeaderValue(MockHttpServletResponse.java:550)
+	at org.springframework.mock.web.MockHttpServletResponse.setHeader(MockHttpServletResponse.java:528)
+	at javax.servlet.http.HttpServletResponseWrapper.setHeader(HttpServletResponseWrapper.java:165)
+	at com.qq183311108.config.shiro.MyKickoutSessionControlFilter.preHandle(MyKickoutSessionControlFilter.java:170)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:131)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at com.qq183311108.sys.controller.PermissionControllerTest.testList(PermissionControllerTest.java:16)
+
+testGetPermissionList(com.qq183311108.sys.controller.PermissionControllerTest)  Time elapsed: 21.021 sec  <<< ERROR!
+javax.servlet.ServletException: java.lang.IllegalArgumentException: Header value must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:134)
+	at org.springframework.mock.web.MockHttpServletResponse.doAddHeaderValue(MockHttpServletResponse.java:577)
+	at org.springframework.mock.web.MockHttpServletResponse.setHeaderValue(MockHttpServletResponse.java:550)
+	at org.springframework.mock.web.MockHttpServletResponse.setHeader(MockHttpServletResponse.java:528)
+	at javax.servlet.http.HttpServletResponseWrapper.setHeader(HttpServletResponseWrapper.java:165)
+	at com.qq183311108.config.shiro.MyKickoutSessionControlFilter.preHandle(MyKickoutSessionControlFilter.java:170)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:131)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at com.qq183311108.sys.controller.PermissionControllerTest.testGetPermissionList(PermissionControllerTest.java:27)
+

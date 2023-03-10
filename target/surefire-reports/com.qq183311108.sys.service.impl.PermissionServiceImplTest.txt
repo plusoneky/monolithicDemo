@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.qq183311108.sys.service.impl.PermissionServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.336 sec - in com.qq183311108.sys.service.impl.PermissionServiceImplTest

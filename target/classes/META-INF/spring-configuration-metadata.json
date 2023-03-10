@@ -45,13 +45,11 @@
     },
     {
       "sourceType": "com.qq183311108.config.properties.SysProperties",
-      "defaultValue": 0,
       "name": "sysProperties.max-malicious-times",
       "type": "java.lang.Long"
     },
     {
       "sourceType": "com.qq183311108.config.properties.SysProperties",
-      "defaultValue": 0,
       "name": "sysProperties.min-request-interval-time",
       "type": "java.lang.Long"
     }

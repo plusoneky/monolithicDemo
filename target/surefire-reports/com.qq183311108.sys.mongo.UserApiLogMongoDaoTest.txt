@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: com.qq183311108.sys.mongo.UserApiLogMongoDaoTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.467 sec <<< FAILURE! - in com.qq183311108.sys.mongo.UserApiLogMongoDaoTest
+testfindByCreatimeAndMobileAndStatus(com.qq183311108.sys.mongo.UserApiLogMongoDaoTest)  Time elapsed: 0.107 sec  <<< ERROR!
+org.springframework.data.mongodb.UncategorizedMongoDbException: Query failed with error code 352 and error message 'Unsupported OP_QUERY command: find. The client driver may require an upgrade. For more details see https://dochub.mongodb.org/core/legacy-opcode-removal' on server 192.168.0.62:27017; nested exception is com.mongodb.MongoQueryException: Query failed with error code 352 and error message 'Unsupported OP_QUERY command: find. The client driver may require an upgrade. For more details see https://dochub.mongodb.org/core/legacy-opcode-removal' on server 192.168.0.62:27017
+	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:521)
+	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:510)
+	at com.mongodb.operation.OperationHelper.withConnectionSource(OperationHelper.java:435)
+	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:408)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:510)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:81)
+	at com.mongodb.Mongo.execute(Mongo.java:836)
+	at com.mongodb.Mongo$2.execute(Mongo.java:823)
+	at com.mongodb.DBCursor.initializeCursor(DBCursor.java:870)
+	at com.mongodb.DBCursor.hasNext(DBCursor.java:142)
+	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:1967)
+	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1787)
+	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1770)
+	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:644)
+	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:635)
+	at com.qq183311108.sys.mongo.UserApiLogMongoDao.selectNoPageFromMongo(UserApiLogMongoDao.java:93)
+	at com.qq183311108.sys.mongo.UserApiLogMongoDaoTest.testfindByCreatimeAndMobileAndStatus(UserApiLogMongoDaoTest.java:80)
+
